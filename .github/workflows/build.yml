@@ -1,4 +1,3 @@
-# 신키-네비(Synkey-Nevi) 분리형 빌드 파이프라인
 name: Build Synkey-Nevi APK
 
 on:
