@@ -1,0 +1,39 @@
+# 신키-네비(Synkey-Nevi) 분리형 빌드 파이프라인
+name: Build Synkey-Nevi APK
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout private source (secure clone via PAT)
+        run: |
+          git clone --depth 1 \
+            "https://x-access-token:${{ secrets.MY_PAT_TOKEN }}@github.com/montage8/synkey_nevi.git" \
+            source
+
+      - name: Set up JDK 17 (required by AGP 8.1.4)
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+          cache: 'gradle'
+
+      - name: Grant execute permission for gradlew
+        working-directory: source
+        run: chmod +x ./gradlew
+
+      - name: Build Debug APK
+        working-directory: source
+        run: ./gradlew assembleDebug --no-daemon --stacktrace
+
+      - name: Upload APK artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: synkey-nevi-debug-apk
+          path: source/app/build/outputs/apk/debug/*.apk
+          if-no-files-found: error
+          retention-days: 7
