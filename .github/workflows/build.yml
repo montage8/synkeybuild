@@ -31,8 +31,9 @@ jobs:
             --no-daemon \
             --stacktrace \
             -Dhttps.protocols=TLSv1.2,TLSv1.3 \
-            -Dorg.gradle.internal.http.connectionTimeout=120000 \
-            -Dorg.gradle.internal.http.socketTimeout=120000
+            -Djdk.tls.client.protocols=TLSv1.2,TLSv1.3 \
+            -Dorg.gradle.internal.http.connectionTimeout=180000 \
+            -Dorg.gradle.internal.http.socketTimeout=180000
 
       - name: Upload APK artifact
         uses: actions/upload-artifact@v4
