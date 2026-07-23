@@ -19,7 +19,7 @@ jobs:
         with:
           distribution: 'temurin'
           java-version: '17'
-          cache: 'gradle'
+          # cache: 'gradle'  # TLS handshake 문제로 인해 임시 비활성화
 
       - name: Grant execute permission for gradlew
         working-directory: source
