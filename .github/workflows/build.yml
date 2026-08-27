@@ -1,44 +1,46 @@
-name: Build Synkey-Nevi APK
+name: Build synkey_nevi
 
 on:
+  repository_dispatch:
+    types: [build-request]
   workflow_dispatch:
+    inputs:
+      branch:
+        description: '빌드할 synkey_nevi 브랜치'
+        required: false
+        default: 'arena/01a03d03-synkey-nevi'
 
 jobs:
   build:
-    runs-on: ubuntu-22.04
-
+    runs-on: ubuntu-latest
     steps:
-      - name: Checkout private source (secure clone via PAT)
-        run: |
-          git clone --depth 1 \
-            "https://x-access-token:${{ secrets.MY_PAT_TOKEN }}@github.com/montage8/synkey_nevi.git" \
-            source
+      - name: Checkout private synkey_nevi
+        uses: actions/checkout@v4
+        with:
+          repository: montage8/synkey_nevi
+          ref: ${{ github.event.client_payload.branch || inputs.branch || 'arena/01a03d03-synkey-nevi' }}
+          token: ${{ secrets.SOURCE_TOKEN }}
 
-      - name: Set up JDK 17 (required by AGP 8.1.4)
+      - name: Set up JDK 17
         uses: actions/setup-java@v4
         with:
-          distribution: 'temurin'
+          distribution: temurin
           java-version: '17'
 
-      - name: Grant execute permission for gradlew
-        working-directory: source
-        run: chmod +x ./gradlew
-
-      - name: Build Debug APK (TLS 문제 회피 옵션 적용)
-        working-directory: source
+      - name: Set up Android SDK components
         run: |
-          ./gradlew assembleDebug \
-            --no-daemon \
-            --stacktrace \
-            -Dhttps.protocols=TLSv1.2,TLSv1.3 \
-            -Djdk.tls.client.protocols=TLSv1.2,TLSv1.3 \
-            -Dorg.gradle.internal.http.connectionTimeout=180000 \
-            -Dorg.gradle.internal.http.socketTimeout=180000
+          yes | sdkmanager --licenses > /dev/null || true
+          sdkmanager --install "platforms;android-34" "build-tools;34.0.0" > /dev/null
+
+      - name: Grant execute permission for gradlew
+        run: chmod +x gradlew
+
+      - name: Build debug APK
+        run: ./gradlew assembleDebug --stacktrace --no-daemon
 
       - name: Upload APK artifact
         uses: actions/upload-artifact@v4
         with:
           name: synkey-nevi-debug-apk
-          path: source/app/build/outputs/apk/debug/*.apk
+          path: app/build/outputs/apk/debug/*.apk
           if-no-files-found: error
-          retention-days: 7
