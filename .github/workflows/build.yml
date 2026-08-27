@@ -6,7 +6,7 @@ on:
   workflow_dispatch:
     inputs:
       branch:
-        description: '빌드할 synkey_nevi 브랜치'
+        description: '빌드할 synkey_nevi 브랫치'
         required: false
         default: 'arena/01a03d03-synkey-nevi'
 
@@ -26,11 +26,6 @@ jobs:
         with:
           distribution: temurin
           java-version: '17'
-
-      - name: Set up Android SDK components
-        run: |
-          yes | sdkmanager --licenses > /dev/null || true
-          sdkmanager --install "platforms;android-34" "build-tools;34.0.0" > /dev/null
 
       - name: Grant execute permission for gradlew
         run: chmod +x gradlew
