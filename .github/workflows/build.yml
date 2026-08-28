@@ -52,12 +52,10 @@ jobs:
           distribution: temurin
           java-version: '17'
 
-      # ubuntu-latest 러너의 SDK 경로(/usr/local/lib/android/sdk)는
-      # synkey_nevi gradle.properties 의 sdk.dir 과 일치한다.
-      - name: Set up Android SDK components
-        run: |
-          yes | sdkmanager --licenses > /dev/null || true
-          sdkmanager --install "platforms;android-34" "build-tools;34.0.0" > /dev/null
+      # 참고: 예전에는 sdkmanager 로 platform-34 를 깔았으나, 현재 ubuntu-latest
+      # 러너에는 sdkmanager 가 PATH 에 없어 exit 127 로 실패한다(2026-08-28 확인).
+      # 러너에 안드로이드 SDK 가 이미 갖춰져 있어 이 단계 자체가 불필요하므로
+      # 제거했다. compileSdk 34 는 기본 이미지로 빌드된다.
 
       - name: Grant execute permission for gradlew
         run: chmod +x gradlew
