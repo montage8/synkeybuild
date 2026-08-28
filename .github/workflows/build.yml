@@ -1,3 +1,23 @@
+# ── 공개 저장소(synkeybuild)에 넣을 빌드 워크플로우 ──────────────────────
+# 이 파일을 synkeybuild 의 .github/workflows/build.yml 로 만든다.
+#
+# 역할: synkey_nevi 의 다리 워크플로우가 보낸 build-request 신호를 받아
+# 개인 저장소 synkey_nevi 를 토큰으로 체크아웃해 빌드한다.
+# 공개 저장소의 Actions 는 무료 무제한이므로 분량 걱정이 없다.
+# 코드는 빌드 기계 안에서만 사용되고 synkeybuild 에 복사되지 않는다.
+#   주의: 빌드 로그와 아티팩트(APK)는 공개 저장소라 누구나 볼 수/받을 수 있다.
+#
+# 2026-08-28 개선(저장 한도 500MB 보호):
+#   1) 아티팩트 보존 기간을 90일 → 14일로 단축 (retention-days)
+#   2) 빌드마다 이전 APK 아티팩트를 삭제하고 최신 3개만 남긴다.
+#      이 단계는 이 저장소의 기본 GITHUB_TOKEN(actions:write 권한을
+#      워크플로우에서 명시적으로 부여)으로 동작하므로, 별도 PAT 권한
+#      변경 없이 항상 작동한다.
+#   → 둘 중 하나만으로도 충분하지만, 이중 방어로 함께 둔다.
+#
+# 필요 시크릿: SOURCE_TOKEN (synkey_nevi 를 읽을 수 있는 개인 액세스 토큰.
+# synkeybuild Settings > Secrets and variables > Actions)
+
 name: Build synkey_nevi
 
 on:
@@ -6,9 +26,14 @@ on:
   workflow_dispatch:
     inputs:
       branch:
-        description: '빌드할 synkey_nevi 브랫치'
+        description: '빌드할 synkey_nevi 브랜치'
         required: false
-        default: 'arena/01a03d03-synkey-nevi'
+        default: 'main'
+
+# 아티팩트 삭제 단계를 위해 actions:write 가 필요. (빌드 자체는 contents:read 로 충분)
+permissions:
+  contents: read
+  actions: write
 
 jobs:
   build:
@@ -18,7 +43,7 @@ jobs:
         uses: actions/checkout@v4
         with:
           repository: montage8/synkey_nevi
-          ref: ${{ github.event.client_payload.branch || inputs.branch || 'arena/01a03d03-synkey-nevi' }}
+          ref: ${{ github.event.client_payload.branch || inputs.branch || 'main' }}
           token: ${{ secrets.SOURCE_TOKEN }}
 
       - name: Set up JDK 17
@@ -26,6 +51,13 @@ jobs:
         with:
           distribution: temurin
           java-version: '17'
+
+      # ubuntu-latest 러너의 SDK 경로(/usr/local/lib/android/sdk)는
+      # synkey_nevi gradle.properties 의 sdk.dir 과 일치한다.
+      - name: Set up Android SDK components
+        run: |
+          yes | sdkmanager --licenses > /dev/null || true
+          sdkmanager --install "platforms;android-34" "build-tools;34.0.0" > /dev/null
 
       - name: Grant execute permission for gradlew
         run: chmod +x gradlew
@@ -39,3 +71,30 @@ jobs:
           name: synkey-nevi-debug-apk
           path: app/build/outputs/apk/debug/*.apk
           if-no-files-found: error
+          # 무료 저장 한도(500MB) 보호 — 90일 기본값 대신 14일만 보존
+          retention-days: 14
+
+      # 최신 3개만 남기고 지난 APK 아티팩트 삭제 (저장 한도 상시 방어)
+      - name: Cleanup old APK artifacts (keep newest 3)
+        if: always()
+        continue-on-error: true
+        env:
+          GT: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          resp=$(curl -sS -H "Authorization: Bearer $GT" \
+            -H "Accept: application/vnd.github+json" \
+            "https://api.github.com/repos/montage8/synkeybuild/actions/artifacts?per_page=100")
+          ids=$(printf '%s' "$resp" | jq -r \
+            'if (.artifacts|type)=="array"
+             then (.artifacts | sort_by(.created_at) | reverse | .[3:] | .[] | .id)
+             else empty end')
+          if [ -z "$ids" ]; then
+            echo "삭제할 아티팩트 없음"
+            exit 0
+          fi
+          for id in $ids; do
+            curl -sS -o /dev/null -w "delete[%{http_code}] id=$id\n" -X DELETE \
+              -H "Authorization: Bearer $GT" \
+              -H "Accept: application/vnd.github+json" \
+              "https://api.github.com/repos/montage8/synkeybuild/actions/artifacts/$id"
+          done
