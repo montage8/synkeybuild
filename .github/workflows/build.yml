@@ -13,7 +13,23 @@
 #      이 단계는 이 저장소의 기본 GITHUB_TOKEN(actions:write 권한을
 #      워크플로우에서 명시적으로 부여)으로 동작하므로, 별도 PAT 권한
 #      변경 없이 항상 작동한다.
-#   → 둘 중 하나만으로도 충분하지만, 이중 방어로 함께 둔다.
+#
+# 2026-08-30 개선(빌드 로그 회수 채널) — 에이전트가 실패 원인을 스스로 읽고
+#   고치는 루프를 만들기 위해 추가했다. 배경:
+#   - Actions 실패 로그는 results-receiver.actions.githubusercontent.com,
+#     아티팩트 zip 은 *.blob.core.windows.net 에서 내려받는다.
+#   - 에이전트 실행 환경에서는 두 호스트가 모두 차단되어 있어(연결 실패)
+#     실패 로그를 읽을 수 없었고, 그 결과 "실패 → 원인 확인 → 수정" 루프가
+#     끊겨 같은 자리를 반복 수정하다 멈췄다 (2026-08-30 NTRIP 작업).
+#   - 반면 api.github.com 은 접근 가능하다. 그래서 빌드 로그를 **이 저장소의
+#     logs/ 경로에 커밋**해 두면, 에이전트가 contents API(base64)로 읽을 수 있다.
+#   → logs/<브랜치>.json      : 어떤 커밋의 결과인지 확인용 마커(가장 먼저 읽을 것)
+#     logs/<브랜치>.errors.txt: 컴파일/빌드 오류만 추린 발췌
+#     logs/<브랜치>.tail.log  : 전체 로그 마지막 부분
+#   브랜치별로 고정 파일명을 덮어쓰므로 정리 작업이 필요 없고, 저장소 크기도
+#   로그 1건당 최대 약 1MB 로 제한된다.
+#   (GITHUB_TOKEN 으로 이 저장소에 커밋하려면 contents: write 가 필요하므로
+#    아래 permissions 를 read → write 로 올렸다.)
 #
 # 필요 시크릿: SOURCE_TOKEN (synkey_nevi 를 읽을 수 있는 개인 액세스 토큰.
 # synkeybuild Settings > Secrets and variables > Actions)
@@ -30,14 +46,17 @@ on:
         required: false
         default: 'main'
 
-# 아티팩트 삭제 단계를 위해 actions:write 가 필요. (빌드 자체는 contents:read 로 충분)
+# logs/ 에 빌드 로그를 커밋(contents:write)하고, 아티팩트를 정리(actions:write)한다.
 permissions:
-  contents: read
+  contents: write
   actions: write
 
 jobs:
   build:
     runs-on: ubuntu-latest
+    env:
+      # 로그 파일명에 쓸 브랜치 이름 (repository_dispatch / 수동 실행 모두 대응)
+      SRC_BRANCH: ${{ github.event.client_payload.branch || inputs.branch || 'main' }}
     steps:
       - name: Checkout private synkey_nevi
         uses: actions/checkout@v4
@@ -45,6 +64,11 @@ jobs:
           repository: montage8/synkey_nevi
           ref: ${{ github.event.client_payload.branch || inputs.branch || 'main' }}
           token: ${{ secrets.SOURCE_TOKEN }}
+
+      - name: Record source sha
+        run: |
+          echo "SOURCE_SHA=$(git rev-parse HEAD)" >> "$GITHUB_ENV"
+          echo "SOURCE_SHA=$(git rev-parse HEAD)"
 
       - name: Set up JDK 17
         uses: actions/setup-java@v4
@@ -61,7 +85,130 @@ jobs:
         run: chmod +x gradlew
 
       - name: Build debug APK
-        run: ./gradlew assembleDebug --stacktrace --no-daemon
+        id: build
+        shell: bash
+        run: |
+          # tee 로 로그를 남기면서도 Gradle 의 실패 종료코드를 유지한다.
+          set -o pipefail
+          ./gradlew assembleDebug --stacktrace --no-daemon 2>&1 | tee /tmp/gradle-build.log
+
+      # ── 빌드 로그를 이 저장소 logs/ 로 커밋 (api.github.com 으로만 읽는 환경용) ──
+      - name: Publish build log to logs/
+        if: always()
+        continue-on-error: true
+        # 기본 셸(bash -e)이면 중간 실패로 로그 게시가 중단될 수 있어 -e 를 끈다
+        shell: bash
+        env:
+          GT: ${{ secrets.GITHUB_TOKEN }}
+          REPO: montage8/synkeybuild
+          BUILD_OUTCOME: ${{ steps.build.outcome }}
+        run: |
+          set -u
+          SOURCE_SHA="${SOURCE_SHA:-unknown}"
+          LOG=/tmp/gradle-build.log
+          if [ ! -f "$LOG" ]; then
+            echo "빌드 로그가 없습니다(빌드 단계 이전 실패) — 상태 마커만 남깁니다."
+            : > "$LOG"
+          fi
+
+          # 파일명에 쓸 안전한 브랜치 슬러그
+          slug=$(printf '%s' "$SRC_BRANCH" | tr -c 'A-Za-z0-9._-' '-' | sed -e 's/--*/-/g' -e 's/^-//' -e 's/-$//')
+          [ -n "$slug" ] || slug=build
+          echo "브랜치=$SRC_BRANCH 슬러그=$slug 결과=$BUILD_OUTCOME sha=$SOURCE_SHA"
+
+          # 시크릿 마스킹 (토큰이 어떤 경로로든 로그에 섞이는 경우를 대비)
+          redact() {
+            sed -E \
+              -e 's/(ghp|gho|ghu|ghs|ghr)_[A-Za-z0-9]{16,}/***REDACTED***/g' \
+              -e 's/github_pat_[A-Za-z0-9_]{16,}/***REDACTED***/g' \
+              -e 's/(Authorization: (Basic|Bearer) )[A-Za-z0-9._%+/-]+/\1***REDACTED***/g'
+          }
+
+          # 1) 오류 발췌 — Kotlin 컴파일러/Gradle 실패 표시 위주
+          {
+            grep -nE '^e: |error:|unresolved reference|type mismatch|FAILURE:|What went wrong|^> Task .* FAILED|Execution failed for task|Caused by:|GradleException|lintKotlinTemplateSuffix' "$LOG" \
+              | tail -n 250 || true
+            echo "----- What went wrong 본문 -----"
+            awk '/What went wrong/{f=1} f{print} f&&++c>45{exit}' "$LOG" || true
+            echo "----- 마지막 60줄 -----"
+            tail -n 60 "$LOG" || true
+          } | redact | tail -c 400000 > /tmp/err.txt
+
+          # 2) 전체 로그 뒷부분
+          tail -n 2000 "$LOG" | redact | tail -c 600000 > /tmp/tail.log
+
+          # 3) 상태 마커 — 에이전트가 "이 로그가 내 커밋 것이 맞나"를 먼저 확인한다
+          {
+            printf '{\n'
+            printf '  "source_branch": "%s",\n' "$SRC_BRANCH"
+            printf '  "source_sha": "%s",\n' "$SOURCE_SHA"
+            printf '  "build_outcome": "%s",\n' "$BUILD_OUTCOME"
+            printf '  "run_id": %s,\n' "${{ github.run_id }}"
+            printf '  "run_attempt": %s,\n' "${{ github.run_attempt }}"
+            printf '  "run_url": "%s",\n' "${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+            printf '  "generated_at": "%s"\n' "$(date -u +%Y-%m-%dT%H:%M:%SZ)"
+            printf '}\n'
+          } > /tmp/status.json
+
+          # 사람이 run 페이지에서 바로 볼 수 있게 요약도 남긴다
+          {
+            echo "### 빌드 결과: $BUILD_OUTCOME"
+            echo ""
+            echo "- 브랜치: \`$SRC_BRANCH\`  커밋: \`$SOURCE_SHA\`"
+            echo "- 로그: \`logs/$slug.errors.txt\`, \`logs/$slug.tail.log\`"
+            echo ""
+            echo '```'
+            head -c 4000 /tmp/err.txt
+            echo '```'
+          } >> "$GITHUB_STEP_SUMMARY" || true
+
+          put_file() { # path localfile message
+            local path="$1" file="$2" msg="$3" sha payload
+            sha=$(curl -sS -H "Authorization: Bearer $GT" -H "Accept: application/vnd.github+json" \
+                    "https://api.github.com/repos/$REPO/contents/$path?ref=main" 2>/dev/null \
+                  | jq -r 'if type=="object" then (.sha // empty) else empty end')
+            if [ -n "$sha" ]; then
+              payload=$(jq -n --arg m "$msg" --arg s "$sha" --rawfile c "$file" \
+                        '{message:$m, sha:$s, content:($c|@base64), branch:"main"}')
+            else
+              payload=$(jq -n --arg m "$msg" --rawfile c "$file" \
+                        '{message:$m, content:($c|@base64), branch:"main"}')
+            fi
+            curl -sS -o /tmp/put_resp.json -w "PUT $path -> HTTP %{http_code}\n" \
+                 -X PUT -H "Authorization: Bearer $GT" -H "Accept: application/vnd.github+json" \
+                 "https://api.github.com/repos/$REPO/contents/$path" -d "$payload" \
+              || echo "PUT $path 실패(네트워크)"
+            # 실패 응답이면 본문도 남겨 원인(권한/보호 브랜치 등)을 알 수 있게 한다
+            if grep -q '"message"' /tmp/put_resp.json 2>/dev/null; then
+              echo "  응답: $(jq -c '{message: .message, errors: .errors}' /tmp/put_resp.json 2>/dev/null)"
+            fi
+          }
+
+          put_file "logs/$slug.json"       /tmp/status.json "ci: 빌드 상태 마커 ($SRC_BRANCH $BUILD_OUTCOME) [skip ci]"
+          put_file "logs/$slug.errors.txt" /tmp/err.txt     "ci: 빌드 오류 발췌 ($SRC_BRANCH $BUILD_OUTCOME) [skip ci]"
+          put_file "logs/$slug.tail.log"   /tmp/tail.log    "ci: 빌드 로그 뒷부분 ($SRC_BRANCH $BUILD_OUTCOME) [skip ci]"
+
+          # 4) 체크런 annotation 으로도 요약을 남긴다.
+          #    api.github.com 의 /repos/{repo}/check-runs/{job_id}/annotations 로
+          #    읽히므로(실측 확인), logs/ 커밋이 권한 문제로 실패해도 원인이 보인다.
+          if [ "$BUILD_OUTCOME" != "success" ]; then
+            ann() { # message title
+              local msg
+              # annotation 메시지의 % 와 CR 은 이스케이프/제거해야 한다
+              msg=$(printf '%s' "$1" | tr -d '\r' | sed -e 's/%/%25/g' | head -c 800)
+              printf '::error title=%s::%s\n' "$2" "$msg"
+            }
+            grep -E 'e: file:|Execution failed for task|A problem occurred|What went wrong|lintKotlinTemplateSuffix|unresolved reference' /tmp/err.txt \
+              | grep -vE '^-{4,}' \
+              | head -n 6 \
+              | while IFS= read -r l; do ann "$l" "BuildError"; done
+            ann "결과 $BUILD_OUTCOME / 브랜치 $SRC_BRANCH / 커밋 $SOURCE_SHA / 상세 logs/$slug.errors.txt" "BuildFailed"
+          fi
+
+          # 아티팩트 업로드용으로 작업 공간 안에도 사본을 둔다
+          # (upload-artifact 는 워크스페이스 밖 절대경로를 거부하는 경우가 있다)
+          cp /tmp/gradle-build.log ./gradle-build.log 2>/dev/null || true
+          cp /tmp/err.txt ./gradle-build-errors.txt 2>/dev/null || true
 
       - name: Upload APK artifact
         uses: actions/upload-artifact@v4
@@ -70,6 +217,19 @@ jobs:
           path: app/build/outputs/apk/debug/*.apk
           if-no-files-found: error
           # 무료 저장 한도(500MB) 보호 — 90일 기본값 대신 14일만 보존
+          retention-days: 14
+
+      # 실패 시에는 통짜 로그도 아티팩트로 남긴다 (웹에서는 이쪽이 보기 편하다)
+      - name: Upload build log artifact
+        if: always()
+        continue-on-error: true
+        uses: actions/upload-artifact@v4
+        with:
+          name: synkey-nevi-build-log
+          path: |
+            gradle-build.log
+            gradle-build-errors.txt
+          if-no-files-found: ignore
           retention-days: 14
 
       # 최신 3개만 남기고 지난 APK 아티팩트 삭제 (저장 한도 상시 방어)
