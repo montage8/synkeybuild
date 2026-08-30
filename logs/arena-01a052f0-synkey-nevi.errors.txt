@@ -2,11 +2,11 @@
 22:lintKotlinTemplateSuffix: 통과 (한글 접미어 오탈자 없음)
 ----- What went wrong 본문 -----
 ----- 마지막 60줄 -----
+> Task :app:validateSigningDebug
+> Task :app:writeDebugAppMetadata
 > Task :app:writeDebugSigningConfigVersions
-
-> Task :app:stripDebugDebugSymbols
-Unable to strip the following libraries, packaging them as they are: libimage_processing_util_jni.so.
-
+> Task :app:processDebugResources
+> Task :app:mergeExtDexDebug
 > Task :app:compileDebugKotlin
 w: file:///home/runner/work/synkeybuild/synkeybuild/app/src/main/java/com/synkey/synkey_nevi/AdvancedGuidanceHelper.kt:177:33 'requestSingleUpdate(String, LocationListener, Looper?): Unit' is deprecated. Deprecated in Java
 w: file:///home/runner/work/synkeybuild/synkeybuild/app/src/main/java/com/synkey/synkey_nevi/AdvancedGuidanceHelper.kt:179:33 'requestSingleUpdate(String, LocationListener, Looper?): Unit' is deprecated. Deprecated in Java
@@ -60,5 +60,5 @@ APK copied to: /home/runner/work/synkeybuild/synkeybuild/app-debug.apk
 No write permission to /var/www/html, attempting sudo copy...
 APK copied to /var/www/html using sudo
 
-BUILD SUCCESSFUL in 2m 21s
+BUILD SUCCESSFUL in 2m 24s
 35 actionable tasks: 35 executed
