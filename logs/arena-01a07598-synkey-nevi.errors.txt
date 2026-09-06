@@ -58,5 +58,5 @@ APK copied to: /home/runner/work/synkeybuild/synkeybuild/app-debug.apk
 No write permission to /var/www/html, attempting sudo copy...
 APK copied to /var/www/html using sudo
 
-BUILD SUCCESSFUL in 2m 20s
+BUILD SUCCESSFUL in 2m 15s
 34 actionable tasks: 34 executed
