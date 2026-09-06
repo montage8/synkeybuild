@@ -1,0 +1,106 @@
+Downloading https://services.gradle.org/distributions/gradle-8.0-bin.zip
+...........10%............20%............30%............40%............50%............60%...........70%............80%............90%............100%
+
+Welcome to Gradle 8.0!
+
+For more details see https://docs.gradle.org/8.0/release-notes.html
+
+To honour the JVM settings for this build a single-use Daemon process will be forked. See https://docs.gradle.org/8.0/userguide/gradle_daemon.html#sec:disabling_the_daemon.
+Daemon will be stopped at the end of the build 
+Checking the license for package Android SDK Build-Tools 33.0.1 in /usr/local/lib/android/sdk/licenses
+License for package Android SDK Build-Tools 33.0.1 accepted.
+Preparing "Install Android SDK Build-Tools 33.0.1 v.33.0.1".
+"Install Android SDK Build-Tools 33.0.1 v.33.0.1" ready.
+Installing Android SDK Build-Tools 33.0.1 in /usr/local/lib/android/sdk/build-tools/33.0.1
+"Install Android SDK Build-Tools 33.0.1 v.33.0.1" complete.
+"Install Android SDK Build-Tools 33.0.1 v.33.0.1" finished.
+> Task :app:preBuild UP-TO-DATE
+> Task :app:preDebugBuild UP-TO-DATE
+> Task :app:mergeDebugNativeDebugMetadata NO-SOURCE
+> Task :app:generateDebugResValues
+> Task :app:checkDebugAarMetadata
+> Task :app:mapDebugSourceSetPaths
+> Task :app:generateDebugResources
+> Task :app:packageDebugResources
+> Task :app:mergeDebugResources
+> Task :app:createDebugCompatibleScreenManifests
+> Task :app:extractDeepLinksDebug
+> Task :app:parseDebugLocalResources
+> Task :app:processDebugMainManifest
+> Task :app:processDebugManifest
+> Task :app:javaPreCompileDebug
+> Task :app:mergeDebugShaders
+> Task :app:compileDebugShaders NO-SOURCE
+> Task :app:generateDebugAssets UP-TO-DATE
+> Task :app:mergeDebugAssets
+> Task :app:compressDebugAssets
+> Task :app:desugarDebugFileDependencies
+> Task :app:mergeDebugJniLibFolders
+> Task :app:checkDebugDuplicateClasses
+> Task :app:mergeDebugNativeLibs
+> Task :app:processDebugManifestForPackage
+> Task :app:mergeLibDexDebug
+
+> Task :app:stripDebugDebugSymbols
+Unable to strip the following libraries, packaging them as they are: libimage_processing_util_jni.so.
+
+> Task :app:validateSigningDebug
+> Task :app:processDebugResources
+> Task :app:writeDebugAppMetadata
+> Task :app:mergeExtDexDebug
+> Task :app:writeDebugSigningConfigVersions
+> Task :app:compileDebugKotlin
+w: file:///home/runner/work/synkeybuild/synkeybuild/app/src/main/java/com/synkey/synkey_nevi/AdvancedGuidanceHelper.kt:177:33 'requestSingleUpdate(String, LocationListener, Looper?): Unit' is deprecated. Deprecated in Java
+w: file:///home/runner/work/synkeybuild/synkeybuild/app/src/main/java/com/synkey/synkey_nevi/AdvancedGuidanceHelper.kt:179:33 'requestSingleUpdate(String, LocationListener, Looper?): Unit' is deprecated. Deprecated in Java
+w: file:///home/runner/work/synkeybuild/synkeybuild/app/src/main/java/com/synkey/synkey_nevi/BeaconAudioFeedback.kt:202:26 'constructor AudioTrack(Int, Int, Int, Int, Int, Int)' is deprecated. Deprecated in Java
+w: file:///home/runner/work/synkeybuild/synkeybuild/app/src/main/java/com/synkey/synkey_nevi/ClockDirectionAudioFeedback.kt:266:26 'constructor AudioTrack(Int, Int, Int, Int, Int, Int)' is deprecated. Deprecated in Java
+w: file:///home/runner/work/synkeybuild/synkeybuild/app/src/main/java/com/synkey/synkey_nevi/ExternalGpsManager.kt:213:45 Parameter 'ssid' is never used
+w: file:///home/runner/work/synkeybuild/synkeybuild/app/src/main/java/com/synkey/synkey_nevi/ExternalGpsManager.kt:213:59 Parameter 'passphrase' is never used
+w: file:///home/runner/work/synkeybuild/synkeybuild/app/src/main/java/com/synkey/synkey_nevi/ExternalGpsWifiDialog.kt:92:38 'SSID: String!' is deprecated. Deprecated in Java
+w: file:///home/runner/work/synkeybuild/synkeybuild/app/src/main/java/com/synkey/synkey_nevi/ExternalGpsWifiDialog.kt:175:36 'connectToReceiver(Context, String, String?): Unit' is deprecated. 와이파이 방식에서는 사용하지 않습니다
+w: file:///home/runner/work/synkeybuild/synkeybuild/app/src/main/java/com/synkey/synkey_nevi/GpsDistanceFilter.kt:160:27 Parameter 'distance' is never used
+w: file:///home/runner/work/synkeybuild/synkeybuild/app/src/main/java/com/synkey/synkey_nevi/GuidanceLogger.kt:164:33 Parameter 'context' is never used
+w: file:///home/runner/work/synkeybuild/synkeybuild/app/src/main/java/com/synkey/synkey_nevi/LandmarkNavigationWindow.kt:1107:53 Parameter 'currentLoc' is never used
+w: file:///home/runner/work/synkeybuild/synkeybuild/app/src/main/java/com/synkey/synkey_nevi/LandmarkNavigationWindow.kt:1465:74 Elvis operator (?:) always returns the left operand of non-nullable type String
+w: file:///home/runner/work/synkeybuild/synkeybuild/app/src/main/java/com/synkey/synkey_nevi/LandmarkNavigationWindow.kt:1490:74 Elvis operator (?:) always returns the left operand of non-nullable type String
+w: file:///home/runner/work/synkeybuild/synkeybuild/app/src/main/java/com/synkey/synkey_nevi/LandmarkNavigationWindow.kt:2562:51 Variable 'calibrationDialog' initializer is redundant
+w: file:///home/runner/work/synkeybuild/synkeybuild/app/src/main/java/com/synkey/synkey_nevi/LandmarkProximityMonitor.kt:365:9 Parameter 'userToLandmarkDistance' is never used
+w: file:///home/runner/work/synkeybuild/synkeybuild/app/src/main/java/com/synkey/synkey_nevi/LandmarkRegistrationDialog.kt:535:27 Unnecessary safe call on a non-null receiver of type AlertDialog?
+w: file:///home/runner/work/synkeybuild/synkeybuild/app/src/main/java/com/synkey/synkey_nevi/LandmarkRegistrationDialog.kt:536:31 Unnecessary safe call on a non-null receiver of type AlertDialog?
+w: file:///home/runner/work/synkeybuild/synkeybuild/app/src/main/java/com/synkey/synkey_nevi/LandmarkRegistrationDialog.kt:541:27 Unnecessary safe call on a non-null receiver of type AlertDialog?
+w: file:///home/runner/work/synkeybuild/synkeybuild/app/src/main/java/com/synkey/synkey_nevi/LandmarkRegistrationDialog.kt:770:42 'WIFI_ONLY' is deprecated. WiFi 모드는 더 이상 사용하지 않습니다. BEACON_ONLY 사용 권장
+w: file:///home/runner/work/synkeybuild/synkeybuild/app/src/main/java/com/synkey/synkey_nevi/LandmarkRenameDialog.kt:101:17 Variable 'alertDialog' is never used
+w: file:///home/runner/work/synkeybuild/synkeybuild/app/src/main/java/com/synkey/synkey_nevi/MainActivity.kt:551:51 'IP_ADDRESS: Pattern!' is deprecated. Deprecated in Java
+w: file:///home/runner/work/synkeybuild/synkeybuild/app/src/main/java/com/synkey/synkey_nevi/MapSearchDialog.kt:764:37 Parameter 'locationName' is never used
+w: file:///home/runner/work/synkeybuild/synkeybuild/app/src/main/java/com/synkey/synkey_nevi/MultiSensorDataCollector.kt:442:35 'SSID: String!' is deprecated. Deprecated in Java
+w: file:///home/runner/work/synkeybuild/synkeybuild/app/src/main/java/com/synkey/synkey_nevi/NtripClientManager.kt:308:34 Variable 'out' initializer is redundant
+w: file:///home/runner/work/synkeybuild/synkeybuild/app/src/main/java/com/synkey/synkey_nevi/OSMService.kt:167:47 'create(MediaType?, String): RequestBody' is deprecated. Moved to extension function. Put the 'content' argument first to fix Java
+w: file:///home/runner/work/synkeybuild/synkeybuild/app/src/main/java/com/synkey/synkey_nevi/PrecisionGuidanceHelper.kt:352:33 'requestSingleUpdate(String, LocationListener, Looper?): Unit' is deprecated. Deprecated in Java
+w: file:///home/runner/work/synkeybuild/synkeybuild/app/src/main/java/com/synkey/synkey_nevi/PrecisionGuidanceHelper.kt:354:33 'requestSingleUpdate(String, LocationListener, Looper?): Unit' is deprecated. Deprecated in Java
+w: file:///home/runner/work/synkeybuild/synkeybuild/app/src/main/java/com/synkey/synkey_nevi/RoutePathFinder.kt:205:13 Variable 'directDistance' is never used
+w: file:///home/runner/work/synkeybuild/synkeybuild/app/src/main/java/com/synkey/synkey_nevi/TextToSpeechHelper.kt:49:22 This declaration overrides deprecated member but not marked as deprecated itself. Please add @Deprecated annotation or suppress. See https://youtrack.jetbrains.com/issue/KT-47902 for details
+w: file:///home/runner/work/synkeybuild/synkeybuild/app/src/main/java/com/synkey/synkey_nevi/VworldService.kt:105:52 Unnecessary safe call on a non-null receiver of type VworldSearchResult?
+w: file:///home/runner/work/synkeybuild/synkeybuild/app/src/main/java/com/synkey/synkey_nevi/VworldService.kt:189:52 Unnecessary safe call on a non-null receiver of type VworldSearchResult?
+w: file:///home/runner/work/synkeybuild/synkeybuild/app/src/main/java/com/synkey/synkey_nevi/VworldService.kt:302:41 Unnecessary safe call on a non-null receiver of type VworldGeocodeResult?
+w: file:///home/runner/work/synkeybuild/synkeybuild/app/src/main/java/com/synkey/synkey_nevi/VworldService.kt:363:60 Unnecessary safe call on a non-null receiver of type VworldGeocodeResult?
+w: file:///home/runner/work/synkeybuild/synkeybuild/app/src/main/java/com/synkey/synkey_nevi/VworldService.kt:421:41 Unnecessary safe call on a non-null receiver of type VworldCoordResult?
+w: file:///home/runner/work/synkeybuild/synkeybuild/app/src/main/java/com/synkey/synkey_nevi/WifiRegistrationDialog.kt:185:34 Unnecessary safe call on a non-null receiver of type ExternalGpsManager.Listener?
+w: file:///home/runner/work/synkeybuild/synkeybuild/app/src/main/java/com/synkey/synkey_nevi/WifiRegistrationDialog.kt:252:29 'startScan(): Boolean' is deprecated. Deprecated in Java
+w: file:///home/runner/work/synkeybuild/synkeybuild/app/src/main/java/com/synkey/synkey_nevi/WifiRegistrationDialog.kt:260:43 'SSID: String!' is deprecated. Deprecated in Java
+
+> Task :app:compileDebugJavaWithJavac NO-SOURCE
+> Task :app:processDebugJavaRes
+> Task :app:mergeDebugJavaResource
+> Task :app:dexBuilderDebug
+> Task :app:mergeProjectDexDebug
+> Task :app:packageDebug
+> Task :app:createDebugApkListingFileRedirect
+> Task :app:assembleDebug
+
+> Task :app:copyDebugApkToRoot
+APK copied to: /home/runner/work/synkeybuild/synkeybuild/app-debug.apk
+No write permission to /var/www/html, attempting sudo copy...
+APK copied to /var/www/html using sudo
+
+BUILD SUCCESSFUL in 2m 27s
+34 actionable tasks: 34 executed
