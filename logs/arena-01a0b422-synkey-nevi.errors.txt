@@ -1,7 +1,7 @@
 ----- What went wrong 본문 -----
-> Task :app:stripDebugDebugSymbols
 Unable to strip the following libraries, packaging them as they are: libimage_processing_util_jni.so.
 
+> Task :app:compileDebugKotlin
 > Task :app:mergeExtDexDebug
 
 > Task :app:compileDebugKotlin
@@ -28,7 +28,7 @@ w: file:///home/runner/work/synkeybuild/synkeybuild/app/src/main/java/com/synkey
 w: file:///home/runner/work/synkeybuild/synkeybuild/app/src/main/java/com/synkey/synkey_nevi/MainActivity.kt:551:51 'IP_ADDRESS: Pattern!' is deprecated. Deprecated in Java
 w: file:///home/runner/work/synkeybuild/synkeybuild/app/src/main/java/com/synkey/synkey_nevi/MapSearchDialog.kt:764:37 Parameter 'locationName' is never used
 w: file:///home/runner/work/synkeybuild/synkeybuild/app/src/main/java/com/synkey/synkey_nevi/MultiSensorDataCollector.kt:442:35 'SSID: String!' is deprecated. Deprecated in Java
-w: file:///home/runner/work/synkeybuild/synkeybuild/app/src/main/java/com/synkey/synkey_nevi/NtripClientManager.kt:337:34 Variable 'out' initializer is redundant
+w: file:///home/runner/work/synkeybuild/synkeybuild/app/src/main/java/com/synkey/synkey_nevi/NtripClientManager.kt:358:34 Variable 'out' initializer is redundant
 w: file:///home/runner/work/synkeybuild/synkeybuild/app/src/main/java/com/synkey/synkey_nevi/OSMService.kt:167:47 'create(MediaType?, String): RequestBody' is deprecated. Moved to extension function. Put the 'content' argument first to fix Java
 w: file:///home/runner/work/synkeybuild/synkeybuild/app/src/main/java/com/synkey/synkey_nevi/PrecisionGuidanceHelper.kt:352:33 'requestSingleUpdate(String, LocationListener, Looper?): Unit' is deprecated. Deprecated in Java
 w: file:///home/runner/work/synkeybuild/synkeybuild/app/src/main/java/com/synkey/synkey_nevi/PrecisionGuidanceHelper.kt:354:33 'requestSingleUpdate(String, LocationListener, Looper?): Unit' is deprecated. Deprecated in Java
@@ -57,5 +57,5 @@ APK copied to: /home/runner/work/synkeybuild/synkeybuild/app-debug.apk
 No write permission to /var/www/html, attempting sudo copy...
 APK copied to /var/www/html using sudo
 
-BUILD SUCCESSFUL in 1m 49s
+BUILD SUCCESSFUL in 1m 46s
 34 actionable tasks: 34 executed
