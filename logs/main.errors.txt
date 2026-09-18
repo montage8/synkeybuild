@@ -1,5 +1,4 @@
 ----- What went wrong 본문 -----
------ 마지막 60줄 -----
 > Task :app:stripDebugDebugSymbols
 Unable to strip the following libraries, packaging them as they are: libimage_processing_util_jni.so.
 
@@ -58,5 +57,5 @@ APK copied to: /home/runner/work/synkeybuild/synkeybuild/app-debug.apk
 No write permission to /var/www/html, attempting sudo copy...
 APK copied to /var/www/html using sudo
 
-BUILD SUCCESSFUL in 2m 27s
+BUILD SUCCESSFUL in 2m 23s
 34 actionable tasks: 34 executed
