@@ -1,9 +1,9 @@
 {
   "source_branch": "arena/01a0b422-synkey-nevi",
-  "source_sha": "1c8c9d5c86580bb22a318d83ce6ee3cb8bb60402",
+  "source_sha": "497c66abcaa046260ace10716dbbb438c60a0408",
   "build_outcome": "failure",
-  "run_id": 35970182746,
+  "run_id": 35970495654,
   "run_attempt": 1,
-  "run_url": "https://github.com/montage8/synkeybuild/actions/runs/35970182746",
-  "generated_at": "2026-09-24T07:34:58Z"
+  "run_url": "https://github.com/montage8/synkeybuild/actions/runs/35970495654",
+  "generated_at": "2026-09-24T07:38:20Z"
 }
