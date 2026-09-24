@@ -2,7 +2,7 @@
 54:e: file:///home/runner/work/synkeybuild/synkeybuild/app/src/main/java/com/synkey/synkey_nevi/AutoStrideCalibrator.kt:342:39 Object is not abstract and does not implement abstract member public abstract fun onStateChanged(state: ExternalGpsManager.ConnectionState): Unit defined in com.synkey.synkey_nevi.ExternalGpsManager.Listener
 55:e: file:///home/runner/work/synkeybuild/synkeybuild/app/src/main/java/com/synkey/synkey_nevi/AutoStrideCalibrator.kt:355:34 Object is not abstract and does not implement abstract member public abstract fun onStateChanged(state: UsbGpsManager.UsbState): Unit defined in com.synkey.synkey_nevi.UsbGpsManager.Listener
 56:e: file:///home/runner/work/synkeybuild/synkeybuild/app/src/main/java/com/synkey/synkey_nevi/AutoStrideCalibrator.kt:357:58 Unresolved reference: getRtkStatus
-57:e: file:///home/runner/work/synkeybuild/synkeybuild/app/src/main/java/com/synkey/synkey_nevi/MainActivity.kt:312:38 Unresolved reference: getRtkStatus
+57:e: file:///home/runner/work/synkeybuild/synkeybuild/app/src/main/java/com/synkey/synkey_nevi/MainActivity.kt:294:38 Unresolved reference: getRtkStatus
 58:e: file:///home/runner/work/synkeybuild/synkeybuild/app/src/main/java/com/synkey/synkey_nevi/PedestrianDeadReckoningHelper.kt:24:49 Unresolved reference: Context
 60:> Task :app:compileDebugKotlin FAILED
 62:FAILURE: Build failed with an exception.
