@@ -22,9 +22,9 @@ Installing Android SDK Build-Tools 33.0.1 in /usr/local/lib/android/sdk/build-to
 > Task :app:mapDebugSourceSetPaths
 > Task :app:generateDebugResources
 > Task :app:packageDebugResources
-> Task :app:mergeDebugResources
 > Task :app:createDebugCompatibleScreenManifests
 > Task :app:extractDeepLinksDebug
+> Task :app:mergeDebugResources
 > Task :app:parseDebugLocalResources
 > Task :app:processDebugMainManifest
 > Task :app:processDebugManifest
@@ -33,16 +33,16 @@ Installing Android SDK Build-Tools 33.0.1 in /usr/local/lib/android/sdk/build-to
 > Task :app:compileDebugShaders NO-SOURCE
 > Task :app:generateDebugAssets UP-TO-DATE
 > Task :app:mergeDebugAssets
-> Task :app:processDebugManifestForPackage
 > Task :app:compressDebugAssets
 > Task :app:desugarDebugFileDependencies
 > Task :app:mergeDebugJniLibFolders
+> Task :app:processDebugManifestForPackage
 > Task :app:checkDebugDuplicateClasses
-> Task :app:mergeDebugNativeLibs
 > Task :app:processDebugResources
 > Task :app:mergeExtDexDebug
-> Task :app:validateSigningDebug
 > Task :app:mergeLibDexDebug
+> Task :app:validateSigningDebug
+> Task :app:mergeDebugNativeLibs
 > Task :app:writeDebugAppMetadata
 > Task :app:writeDebugSigningConfigVersions
 
@@ -54,7 +54,7 @@ e: file:///home/runner/work/synkeybuild/synkeybuild/app/src/main/java/com/synkey
 e: file:///home/runner/work/synkeybuild/synkeybuild/app/src/main/java/com/synkey/synkey_nevi/AutoStrideCalibrator.kt:342:39 Object is not abstract and does not implement abstract member public abstract fun onStateChanged(state: ExternalGpsManager.ConnectionState): Unit defined in com.synkey.synkey_nevi.ExternalGpsManager.Listener
 e: file:///home/runner/work/synkeybuild/synkeybuild/app/src/main/java/com/synkey/synkey_nevi/AutoStrideCalibrator.kt:355:34 Object is not abstract and does not implement abstract member public abstract fun onStateChanged(state: UsbGpsManager.UsbState): Unit defined in com.synkey.synkey_nevi.UsbGpsManager.Listener
 e: file:///home/runner/work/synkeybuild/synkeybuild/app/src/main/java/com/synkey/synkey_nevi/AutoStrideCalibrator.kt:357:58 Unresolved reference: getRtkStatus
-e: file:///home/runner/work/synkeybuild/synkeybuild/app/src/main/java/com/synkey/synkey_nevi/MainActivity.kt:312:38 Unresolved reference: getRtkStatus
+e: file:///home/runner/work/synkeybuild/synkeybuild/app/src/main/java/com/synkey/synkey_nevi/MainActivity.kt:294:38 Unresolved reference: getRtkStatus
 e: file:///home/runner/work/synkeybuild/synkeybuild/app/src/main/java/com/synkey/synkey_nevi/PedestrianDeadReckoningHelper.kt:24:49 Unresolved reference: Context
 
 > Task :app:compileDebugKotlin FAILED
