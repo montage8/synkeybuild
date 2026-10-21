@@ -65,9 +65,27 @@ jobs:
       - name: Grant execute permission for gradlew
         run: chmod +x gradlew
 
+      - name: Verify API key secrets (API 키 시크릿 확인)
+        env:
+          KAKAO_REST_API_KEY: ${{ secrets.KAKAO_REST_API_KEY }}
+          VWORLD_API_KEY: ${{ secrets.VWORLD_API_KEY }}
+        run: |
+          MISSING=""
+          [ -n "$KAKAO_REST_API_KEY" ] || MISSING="$MISSING KAKAO_REST_API_KEY"
+          [ -n "$VWORLD_API_KEY" ] || MISSING="$MISSING VWORLD_API_KEY"
+          if [ -n "$MISSING" ]; then
+            echo "❌ API 키 시크릿 부족:$MISSING"
+            echo "   synkeybuild 저장소 > Settings > Secrets and variables > Actions > New repository secret 에 등록하세요."
+            exit 1
+          fi
+          echo "✅ API 키 시크릿 검증 완료 (카카오 ${#KAKAO_REST_API_KEY}자, 비월드 ${#VWORLD_API_KEY}자)"
+
       - name: Build debug APK (공용 키스토어로 서명됨)
         id: build
         shell: bash
+        env:
+          KAKAO_REST_API_KEY: ${{ secrets.KAKAO_REST_API_KEY }}
+          VWORLD_API_KEY: ${{ secrets.VWORLD_API_KEY }}
         run: |
           set -o pipefail
           ./gradlew assembleDebug --stacktrace --no-daemon 2>&1 | tee /tmp/gradle-build.log
