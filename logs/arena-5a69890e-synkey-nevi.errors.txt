@@ -3,12 +3,12 @@ w: file:///home/runner/work/synkeybuild/synkeybuild/app/src/main/java/com/synkey
 w: file:///home/runner/work/synkeybuild/synkeybuild/app/src/main/java/com/synkey/synkey_nevi/ExternalGpsWifiDialog.kt:175:36 'connectToReceiver(Context, String, String?): Unit' is deprecated. 와이파이 방식에서는 사용하지 않습니다
 w: file:///home/runner/work/synkeybuild/synkeybuild/app/src/main/java/com/synkey/synkey_nevi/GpsDistanceFilter.kt:160:27 Parameter 'distance' is never used
 w: file:///home/runner/work/synkeybuild/synkeybuild/app/src/main/java/com/synkey/synkey_nevi/GuidanceLogger.kt:164:33 Parameter 'context' is never used
-w: file:///home/runner/work/synkeybuild/synkeybuild/app/src/main/java/com/synkey/synkey_nevi/KakaoLocalService.kt:472:87 There is more than one label with such a name in this scope
-w: file:///home/runner/work/synkeybuild/synkeybuild/app/src/main/java/com/synkey/synkey_nevi/KakaoLocalService.kt:473:84 There is more than one label with such a name in this scope
-w: file:///home/runner/work/synkeybuild/synkeybuild/app/src/main/java/com/synkey/synkey_nevi/LandmarkNavigationWindow.kt:1114:53 Parameter 'currentLoc' is never used
-w: file:///home/runner/work/synkeybuild/synkeybuild/app/src/main/java/com/synkey/synkey_nevi/LandmarkNavigationWindow.kt:1990:74 Elvis operator (?:) always returns the left operand of non-nullable type String
-w: file:///home/runner/work/synkeybuild/synkeybuild/app/src/main/java/com/synkey/synkey_nevi/LandmarkNavigationWindow.kt:2015:74 Elvis operator (?:) always returns the left operand of non-nullable type String
-w: file:///home/runner/work/synkeybuild/synkeybuild/app/src/main/java/com/synkey/synkey_nevi/LandmarkNavigationWindow.kt:3097:51 Variable 'calibrationDialog' initializer is redundant
+w: file:///home/runner/work/synkeybuild/synkeybuild/app/src/main/java/com/synkey/synkey_nevi/KakaoLocalService.kt:477:87 There is more than one label with such a name in this scope
+w: file:///home/runner/work/synkeybuild/synkeybuild/app/src/main/java/com/synkey/synkey_nevi/KakaoLocalService.kt:478:84 There is more than one label with such a name in this scope
+w: file:///home/runner/work/synkeybuild/synkeybuild/app/src/main/java/com/synkey/synkey_nevi/LandmarkNavigationWindow.kt:1140:53 Parameter 'currentLoc' is never used
+w: file:///home/runner/work/synkeybuild/synkeybuild/app/src/main/java/com/synkey/synkey_nevi/LandmarkNavigationWindow.kt:2069:74 Elvis operator (?:) always returns the left operand of non-nullable type String
+w: file:///home/runner/work/synkeybuild/synkeybuild/app/src/main/java/com/synkey/synkey_nevi/LandmarkNavigationWindow.kt:2094:74 Elvis operator (?:) always returns the left operand of non-nullable type String
+w: file:///home/runner/work/synkeybuild/synkeybuild/app/src/main/java/com/synkey/synkey_nevi/LandmarkNavigationWindow.kt:3176:51 Variable 'calibrationDialog' initializer is redundant
 w: file:///home/runner/work/synkeybuild/synkeybuild/app/src/main/java/com/synkey/synkey_nevi/LandmarkOffsetRegistrationDialog.kt:42:17 Variable 'activity' is never used
 w: file:///home/runner/work/synkeybuild/synkeybuild/app/src/main/java/com/synkey/synkey_nevi/LandmarkOffsetRegistrationDialog.kt:69:17 Variable 'classificationRadioGroup' is never used
 w: file:///home/runner/work/synkeybuild/synkeybuild/app/src/main/java/com/synkey/synkey_nevi/LandmarkOffsetRegistrationDialog.kt:126:30 Unnecessary safe call on a non-null receiver of type SensorManager?
@@ -19,7 +19,7 @@ w: file:///home/runner/work/synkeybuild/synkeybuild/app/src/main/java/com/synkey
 w: file:///home/runner/work/synkeybuild/synkeybuild/app/src/main/java/com/synkey/synkey_nevi/LandmarkRegistrationDialog.kt:773:42 'WIFI_ONLY' is deprecated. WiFi 모드는 더 이상 사용하지 않습니다. BEACON_ONLY 사용 권장
 w: file:///home/runner/work/synkeybuild/synkeybuild/app/src/main/java/com/synkey/synkey_nevi/LandmarkRenameDialog.kt:101:17 Variable 'alertDialog' is never used
 w: file:///home/runner/work/synkeybuild/synkeybuild/app/src/main/java/com/synkey/synkey_nevi/MainActivity.kt:522:51 'IP_ADDRESS: Pattern!' is deprecated. Deprecated in Java
-w: file:///home/runner/work/synkeybuild/synkeybuild/app/src/main/java/com/synkey/synkey_nevi/MapSearchDialog.kt:886:37 Parameter 'locationName' is never used
+w: file:///home/runner/work/synkeybuild/synkeybuild/app/src/main/java/com/synkey/synkey_nevi/MapSearchDialog.kt:898:37 Parameter 'locationName' is never used
 w: file:///home/runner/work/synkeybuild/synkeybuild/app/src/main/java/com/synkey/synkey_nevi/MultiSensorDataCollector.kt:467:35 'SSID: String!' is deprecated. Deprecated in Java
 w: file:///home/runner/work/synkeybuild/synkeybuild/app/src/main/java/com/synkey/synkey_nevi/NtripClientManager.kt:358:34 Variable 'out' initializer is redundant
 w: file:///home/runner/work/synkeybuild/synkeybuild/app/src/main/java/com/synkey/synkey_nevi/OSMService.kt:167:47 'create(MediaType?, String): RequestBody' is deprecated. Moved to extension function. Put the 'content' argument first to fix Java
@@ -57,5 +57,5 @@ APK copied to: /home/runner/work/synkeybuild/synkeybuild/app-debug.apk
 No write permission to /var/www/html, attempting sudo copy...
 APK copied to /var/www/html using sudo
 
-BUILD SUCCESSFUL in 2m 31s
+BUILD SUCCESSFUL in 2m 35s
 34 actionable tasks: 34 executed
