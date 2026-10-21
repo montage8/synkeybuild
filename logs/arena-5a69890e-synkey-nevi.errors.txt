@@ -43,7 +43,7 @@ w: file:///home/runner/work/synkeybuild/synkeybuild/app/src/main/java/com/synkey
 w: file:///home/runner/work/synkeybuild/synkeybuild/app/src/main/java/com/synkey/synkey_nevi/WifiRegistrationDialog.kt:286:29 'startScan(): Boolean' is deprecated. Deprecated in Java
 w: file:///home/runner/work/synkeybuild/synkeybuild/app/src/main/java/com/synkey/synkey_nevi/WifiRegistrationDialog.kt:294:43 'SSID: String!' is deprecated. Deprecated in Java
 
-> Task :app:compileDebugJavaWithJavac NO-SOURCE
+> Task :app:compileDebugJavaWithJavac
 > Task :app:processDebugJavaRes
 > Task :app:mergeDebugJavaResource
 > Task :app:dexBuilderDebug
@@ -57,5 +57,5 @@ APK copied to: /home/runner/work/synkeybuild/synkeybuild/app-debug.apk
 No write permission to /var/www/html, attempting sudo copy...
 APK copied to /var/www/html using sudo
 
-BUILD SUCCESSFUL in 2m 35s
-34 actionable tasks: 34 executed
+BUILD SUCCESSFUL in 2m 1s
+36 actionable tasks: 36 executed
