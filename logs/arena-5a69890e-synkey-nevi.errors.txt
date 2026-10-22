@@ -2,13 +2,12 @@
 w: file:///home/runner/work/synkeybuild/synkeybuild/app/src/main/java/com/synkey/synkey_nevi/ExternalGpsWifiDialog.kt:175:36 'connectToReceiver(Context, String, String?): Unit' is deprecated. 와이파이 방식에서는 사용하지 않습니다
 w: file:///home/runner/work/synkeybuild/synkeybuild/app/src/main/java/com/synkey/synkey_nevi/GpsDistanceFilter.kt:160:27 Parameter 'distance' is never used
 w: file:///home/runner/work/synkeybuild/synkeybuild/app/src/main/java/com/synkey/synkey_nevi/GuidanceLogger.kt:164:33 Parameter 'context' is never used
-w: file:///home/runner/work/synkeybuild/synkeybuild/app/src/main/java/com/synkey/synkey_nevi/GuidanceTonePlayer.kt:88:21 'constructor AudioTrack(Int, Int, Int, Int, Int, Int)' is deprecated. Deprecated in Java
 w: file:///home/runner/work/synkeybuild/synkeybuild/app/src/main/java/com/synkey/synkey_nevi/KakaoLocalService.kt:477:87 There is more than one label with such a name in this scope
 w: file:///home/runner/work/synkeybuild/synkeybuild/app/src/main/java/com/synkey/synkey_nevi/KakaoLocalService.kt:478:84 There is more than one label with such a name in this scope
-w: file:///home/runner/work/synkeybuild/synkeybuild/app/src/main/java/com/synkey/synkey_nevi/LandmarkNavigationWindow.kt:1140:53 Parameter 'currentLoc' is never used
-w: file:///home/runner/work/synkeybuild/synkeybuild/app/src/main/java/com/synkey/synkey_nevi/LandmarkNavigationWindow.kt:2086:74 Elvis operator (?:) always returns the left operand of non-nullable type String
-w: file:///home/runner/work/synkeybuild/synkeybuild/app/src/main/java/com/synkey/synkey_nevi/LandmarkNavigationWindow.kt:2111:74 Elvis operator (?:) always returns the left operand of non-nullable type String
-w: file:///home/runner/work/synkeybuild/synkeybuild/app/src/main/java/com/synkey/synkey_nevi/LandmarkNavigationWindow.kt:3193:51 Variable 'calibrationDialog' initializer is redundant
+w: file:///home/runner/work/synkeybuild/synkeybuild/app/src/main/java/com/synkey/synkey_nevi/LandmarkNavigationWindow.kt:1158:53 Parameter 'currentLoc' is never used
+w: file:///home/runner/work/synkeybuild/synkeybuild/app/src/main/java/com/synkey/synkey_nevi/LandmarkNavigationWindow.kt:2161:74 Elvis operator (?:) always returns the left operand of non-nullable type String
+w: file:///home/runner/work/synkeybuild/synkeybuild/app/src/main/java/com/synkey/synkey_nevi/LandmarkNavigationWindow.kt:2186:74 Elvis operator (?:) always returns the left operand of non-nullable type String
+w: file:///home/runner/work/synkeybuild/synkeybuild/app/src/main/java/com/synkey/synkey_nevi/LandmarkNavigationWindow.kt:3268:51 Variable 'calibrationDialog' initializer is redundant
 w: file:///home/runner/work/synkeybuild/synkeybuild/app/src/main/java/com/synkey/synkey_nevi/LandmarkOffsetRegistrationDialog.kt:42:17 Variable 'activity' is never used
 w: file:///home/runner/work/synkeybuild/synkeybuild/app/src/main/java/com/synkey/synkey_nevi/LandmarkOffsetRegistrationDialog.kt:69:17 Variable 'classificationRadioGroup' is never used
 w: file:///home/runner/work/synkeybuild/synkeybuild/app/src/main/java/com/synkey/synkey_nevi/LandmarkOffsetRegistrationDialog.kt:126:30 Unnecessary safe call on a non-null receiver of type SensorManager?
@@ -18,7 +17,7 @@ w: file:///home/runner/work/synkeybuild/synkeybuild/app/src/main/java/com/synkey
 w: file:///home/runner/work/synkeybuild/synkeybuild/app/src/main/java/com/synkey/synkey_nevi/LandmarkRegistrationDialog.kt:544:27 Unnecessary safe call on a non-null receiver of type AlertDialog?
 w: file:///home/runner/work/synkeybuild/synkeybuild/app/src/main/java/com/synkey/synkey_nevi/LandmarkRegistrationDialog.kt:773:42 'WIFI_ONLY' is deprecated. WiFi 모드는 더 이상 사용하지 않습니다. BEACON_ONLY 사용 권장
 w: file:///home/runner/work/synkeybuild/synkeybuild/app/src/main/java/com/synkey/synkey_nevi/LandmarkRenameDialog.kt:101:17 Variable 'alertDialog' is never used
-w: file:///home/runner/work/synkeybuild/synkeybuild/app/src/main/java/com/synkey/synkey_nevi/MainActivity.kt:522:51 'IP_ADDRESS: Pattern!' is deprecated. Deprecated in Java
+w: file:///home/runner/work/synkeybuild/synkeybuild/app/src/main/java/com/synkey/synkey_nevi/MainActivity.kt:541:51 'IP_ADDRESS: Pattern!' is deprecated. Deprecated in Java
 w: file:///home/runner/work/synkeybuild/synkeybuild/app/src/main/java/com/synkey/synkey_nevi/MapSearchDialog.kt:898:37 Parameter 'locationName' is never used
 w: file:///home/runner/work/synkeybuild/synkeybuild/app/src/main/java/com/synkey/synkey_nevi/MultiSensorDataCollector.kt:467:35 'SSID: String!' is deprecated. Deprecated in Java
 w: file:///home/runner/work/synkeybuild/synkeybuild/app/src/main/java/com/synkey/synkey_nevi/NtripClientManager.kt:358:34 Variable 'out' initializer is redundant
@@ -26,7 +25,8 @@ w: file:///home/runner/work/synkeybuild/synkeybuild/app/src/main/java/com/synkey
 w: file:///home/runner/work/synkeybuild/synkeybuild/app/src/main/java/com/synkey/synkey_nevi/PrecisionGuidanceHelper.kt:365:33 'requestSingleUpdate(String, LocationListener, Looper?): Unit' is deprecated. Deprecated in Java
 w: file:///home/runner/work/synkeybuild/synkeybuild/app/src/main/java/com/synkey/synkey_nevi/PrecisionGuidanceHelper.kt:367:33 'requestSingleUpdate(String, LocationListener, Looper?): Unit' is deprecated. Deprecated in Java
 w: file:///home/runner/work/synkeybuild/synkeybuild/app/src/main/java/com/synkey/synkey_nevi/RoutePathFinder.kt:212:13 Variable 'directDistance' is never used
-w: file:///home/runner/work/synkeybuild/synkeybuild/app/src/main/java/com/synkey/synkey_nevi/TextToSpeechHelper.kt:59:22 This declaration overrides deprecated member but not marked as deprecated itself. Please add @Deprecated annotation or suppress. See https://youtrack.jetbrains.com/issue/KT-47902 for details
+w: file:///home/runner/work/synkeybuild/synkeybuild/app/src/main/java/com/synkey/synkey_nevi/RtkStatusAnnouncer.kt:77:13 Variable 'ctx' is never used
+w: file:///home/runner/work/synkeybuild/synkeybuild/app/src/main/java/com/synkey/synkey_nevi/TextToSpeechHelper.kt:79:22 This declaration overrides deprecated member but not marked as deprecated itself. Please add @Deprecated annotation or suppress. See https://youtrack.jetbrains.com/issue/KT-47902 for details
 w: file:///home/runner/work/synkeybuild/synkeybuild/app/src/main/java/com/synkey/synkey_nevi/UsbGpsManager.kt:469:19 Unnecessary safe call on a non-null receiver of type Context
 w: file:///home/runner/work/synkeybuild/synkeybuild/app/src/main/java/com/synkey/synkey_nevi/UsbGpsManager.kt:474:19 Unnecessary safe call on a non-null receiver of type Context
 w: file:///home/runner/work/synkeybuild/synkeybuild/app/src/main/java/com/synkey/synkey_nevi/UsbGpsManager.kt:480:19 Unnecessary safe call on a non-null receiver of type Context
@@ -57,5 +57,5 @@ APK copied to: /home/runner/work/synkeybuild/synkeybuild/app-debug.apk
 No write permission to /var/www/html, attempting sudo copy...
 APK copied to /var/www/html using sudo
 
-BUILD SUCCESSFUL in 2m 39s
+BUILD SUCCESSFUL in 2m 38s
 36 actionable tasks: 36 executed
