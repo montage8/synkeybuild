@@ -35,21 +35,21 @@ Installing Android SDK Build-Tools 33.0.1 in /usr/local/lib/android/sdk/build-to
 > Task :app:generateDebugAssets UP-TO-DATE
 > Task :app:mergeDebugAssets
 > Task :app:compressDebugAssets
-> Task :app:desugarDebugFileDependencies
-> Task :app:mergeDebugJniLibFolders
-> Task :app:checkDebugDuplicateClasses
-> Task :app:mergeDebugNativeLibs
 > Task :app:processDebugManifestForPackage
+> Task :app:checkDebugDuplicateClasses
+> Task :app:desugarDebugFileDependencies
+> Task :app:processDebugResources
 > Task :app:mergeExtDexDebug
+> Task :app:mergeDebugJniLibFolders
 > Task :app:mergeLibDexDebug
 > Task :app:validateSigningDebug
 > Task :app:writeDebugAppMetadata
 > Task :app:writeDebugSigningConfigVersions
+> Task :app:mergeDebugNativeLibs
 
 > Task :app:stripDebugDebugSymbols
 Unable to strip the following libraries, packaging them as they are: libimage_processing_util_jni.so, librealm-jni.so.
 
-> Task :app:processDebugResources
 > Task :app:compileDebugKotlin
 w: file:///home/runner/work/synkeybuild/synkeybuild/app/src/main/java/com/synkey/synkey_nevi/AdvancedGuidanceHelper.kt:188:33 'requestSingleUpdate(String, LocationListener, Looper?): Unit' is deprecated. Deprecated in Java
 w: file:///home/runner/work/synkeybuild/synkeybuild/app/src/main/java/com/synkey/synkey_nevi/AdvancedGuidanceHelper.kt:190:33 'requestSingleUpdate(String, LocationListener, Looper?): Unit' is deprecated. Deprecated in Java
@@ -63,23 +63,22 @@ w: file:///home/runner/work/synkeybuild/synkeybuild/app/src/main/java/com/synkey
 w: file:///home/runner/work/synkeybuild/synkeybuild/app/src/main/java/com/synkey/synkey_nevi/GuidanceLogger.kt:164:33 Parameter 'context' is never used
 w: file:///home/runner/work/synkeybuild/synkeybuild/app/src/main/java/com/synkey/synkey_nevi/KakaoLocalService.kt:478:87 There is more than one label with such a name in this scope
 w: file:///home/runner/work/synkeybuild/synkeybuild/app/src/main/java/com/synkey/synkey_nevi/KakaoLocalService.kt:479:84 There is more than one label with such a name in this scope
-w: file:///home/runner/work/synkeybuild/synkeybuild/app/src/main/java/com/synkey/synkey_nevi/KnsdkSafetyManager.kt:304:54 The corresponding parameter in the supertype 'KNGuidance_SafetyGuideDelegate' is named 'aGuidance'. This may cause problems when calling this function with named arguments.
-w: file:///home/runner/work/synkeybuild/synkeybuild/app/src/main/java/com/synkey/synkey_nevi/KnsdkSafetyManager.kt:304:76 The corresponding parameter in the supertype 'KNGuidance_SafetyGuideDelegate' is named 'aSafeties'. This may cause problems when calling this function with named arguments.
-w: file:///home/runner/work/synkeybuild/synkeybuild/app/src/main/java/com/synkey/synkey_nevi/KnsdkSafetyManager.kt:310:51 The corresponding parameter in the supertype 'KNGuidance_SafetyGuideDelegate' is named 'aGuidance'. This may cause problems when calling this function with named arguments.
-w: file:///home/runner/work/synkeybuild/synkeybuild/app/src/main/java/com/synkey/synkey_nevi/KnsdkSafetyManager.kt:310:73 The corresponding parameter in the supertype 'KNGuidance_SafetyGuideDelegate' is named 'aSafetyGuide'. This may cause problems when calling this function with named arguments.
-w: file:///home/runner/work/synkeybuild/synkeybuild/app/src/main/java/com/synkey/synkey_nevi/KnsdkSafetyManager.kt:323:13 The corresponding parameter in the supertype 'KNGuidance_VoiceGuideDelegate' is named 'aGuidance'. This may cause problems when calling this function with named arguments.
-w: file:///home/runner/work/synkeybuild/synkeybuild/app/src/main/java/com/synkey/synkey_nevi/KnsdkSafetyManager.kt:324:13 The corresponding parameter in the supertype 'KNGuidance_VoiceGuideDelegate' is named 'aVoiceGuide'. This may cause problems when calling this function with named arguments.
-w: file:///home/runner/work/synkeybuild/synkeybuild/app/src/main/java/com/synkey/synkey_nevi/KnsdkSafetyManager.kt:325:13 The corresponding parameter in the supertype 'KNGuidance_VoiceGuideDelegate' is named 'aNewData'. This may cause problems when calling this function with named arguments.
-w: file:///home/runner/work/synkeybuild/synkeybuild/app/src/main/java/com/synkey/synkey_nevi/KnsdkSafetyManager.kt:328:41 The corresponding parameter in the supertype 'KNGuidance_VoiceGuideDelegate' is named 'aGuidance'. This may cause problems when calling this function with named arguments.
-w: file:///home/runner/work/synkeybuild/synkeybuild/app/src/main/java/com/synkey/synkey_nevi/KnsdkSafetyManager.kt:328:63 The corresponding parameter in the supertype 'KNGuidance_VoiceGuideDelegate' is named 'aVoiceGuide'. This may cause problems when calling this function with named arguments.
-w: file:///home/runner/work/synkeybuild/synkeybuild/app/src/main/java/com/synkey/synkey_nevi/KnsdkSafetyManager.kt:330:46 The corresponding parameter in the supertype 'KNGuidance_VoiceGuideDelegate' is named 'aGuidance'. This may cause problems when calling this function with named arguments.
-w: file:///home/runner/work/synkeybuild/synkeybuild/app/src/main/java/com/synkey/synkey_nevi/KnsdkSafetyManager.kt:330:68 The corresponding parameter in the supertype 'KNGuidance_VoiceGuideDelegate' is named 'aVoiceGuide'. This may cause problems when calling this function with named arguments.
-w: file:///home/runner/work/synkeybuild/synkeybuild/app/src/main/java/com/synkey/synkey_nevi/KnsdkSafetyManager.kt:339:26 Parameter 'location' is never used
-w: file:///home/runner/work/synkeybuild/synkeybuild/app/src/main/java/com/synkey/synkey_nevi/KnsdkSafetyManager.kt:355:13 Variable 'lis' is never used
-w: file:///home/runner/work/synkeybuild/synkeybuild/app/src/main/java/com/synkey/synkey_nevi/LandmarkNavigationWindow.kt:1178:53 Parameter 'currentLoc' is never used
-w: file:///home/runner/work/synkeybuild/synkeybuild/app/src/main/java/com/synkey/synkey_nevi/LandmarkNavigationWindow.kt:2267:74 Elvis operator (?:) always returns the left operand of non-nullable type String
-w: file:///home/runner/work/synkeybuild/synkeybuild/app/src/main/java/com/synkey/synkey_nevi/LandmarkNavigationWindow.kt:2292:74 Elvis operator (?:) always returns the left operand of non-nullable type String
-w: file:///home/runner/work/synkeybuild/synkeybuild/app/src/main/java/com/synkey/synkey_nevi/LandmarkNavigationWindow.kt:3374:51 Variable 'calibrationDialog' initializer is redundant
+w: file:///home/runner/work/synkeybuild/synkeybuild/app/src/main/java/com/synkey/synkey_nevi/KnsdkSafetyManager.kt:371:54 The corresponding parameter in the supertype 'KNGuidance_SafetyGuideDelegate' is named 'aGuidance'. This may cause problems when calling this function with named arguments.
+w: file:///home/runner/work/synkeybuild/synkeybuild/app/src/main/java/com/synkey/synkey_nevi/KnsdkSafetyManager.kt:371:76 The corresponding parameter in the supertype 'KNGuidance_SafetyGuideDelegate' is named 'aSafeties'. This may cause problems when calling this function with named arguments.
+w: file:///home/runner/work/synkeybuild/synkeybuild/app/src/main/java/com/synkey/synkey_nevi/KnsdkSafetyManager.kt:377:51 The corresponding parameter in the supertype 'KNGuidance_SafetyGuideDelegate' is named 'aGuidance'. This may cause problems when calling this function with named arguments.
+w: file:///home/runner/work/synkeybuild/synkeybuild/app/src/main/java/com/synkey/synkey_nevi/KnsdkSafetyManager.kt:377:73 The corresponding parameter in the supertype 'KNGuidance_SafetyGuideDelegate' is named 'aSafetyGuide'. This may cause problems when calling this function with named arguments.
+w: file:///home/runner/work/synkeybuild/synkeybuild/app/src/main/java/com/synkey/synkey_nevi/KnsdkSafetyManager.kt:390:13 The corresponding parameter in the supertype 'KNGuidance_VoiceGuideDelegate' is named 'aGuidance'. This may cause problems when calling this function with named arguments.
+w: file:///home/runner/work/synkeybuild/synkeybuild/app/src/main/java/com/synkey/synkey_nevi/KnsdkSafetyManager.kt:391:13 The corresponding parameter in the supertype 'KNGuidance_VoiceGuideDelegate' is named 'aVoiceGuide'. This may cause problems when calling this function with named arguments.
+w: file:///home/runner/work/synkeybuild/synkeybuild/app/src/main/java/com/synkey/synkey_nevi/KnsdkSafetyManager.kt:392:13 The corresponding parameter in the supertype 'KNGuidance_VoiceGuideDelegate' is named 'aNewData'. This may cause problems when calling this function with named arguments.
+w: file:///home/runner/work/synkeybuild/synkeybuild/app/src/main/java/com/synkey/synkey_nevi/KnsdkSafetyManager.kt:395:41 The corresponding parameter in the supertype 'KNGuidance_VoiceGuideDelegate' is named 'aGuidance'. This may cause problems when calling this function with named arguments.
+w: file:///home/runner/work/synkeybuild/synkeybuild/app/src/main/java/com/synkey/synkey_nevi/KnsdkSafetyManager.kt:395:63 The corresponding parameter in the supertype 'KNGuidance_VoiceGuideDelegate' is named 'aVoiceGuide'. This may cause problems when calling this function with named arguments.
+w: file:///home/runner/work/synkeybuild/synkeybuild/app/src/main/java/com/synkey/synkey_nevi/KnsdkSafetyManager.kt:397:46 The corresponding parameter in the supertype 'KNGuidance_VoiceGuideDelegate' is named 'aGuidance'. This may cause problems when calling this function with named arguments.
+w: file:///home/runner/work/synkeybuild/synkeybuild/app/src/main/java/com/synkey/synkey_nevi/KnsdkSafetyManager.kt:397:68 The corresponding parameter in the supertype 'KNGuidance_VoiceGuideDelegate' is named 'aVoiceGuide'. This may cause problems when calling this function with named arguments.
+w: file:///home/runner/work/synkeybuild/synkeybuild/app/src/main/java/com/synkey/synkey_nevi/KnsdkSafetyManager.kt:406:26 Parameter 'location' is never used
+w: file:///home/runner/work/synkeybuild/synkeybuild/app/src/main/java/com/synkey/synkey_nevi/LandmarkNavigationWindow.kt:1186:53 Parameter 'currentLoc' is never used
+w: file:///home/runner/work/synkeybuild/synkeybuild/app/src/main/java/com/synkey/synkey_nevi/LandmarkNavigationWindow.kt:2289:74 Elvis operator (?:) always returns the left operand of non-nullable type String
+w: file:///home/runner/work/synkeybuild/synkeybuild/app/src/main/java/com/synkey/synkey_nevi/LandmarkNavigationWindow.kt:2314:74 Elvis operator (?:) always returns the left operand of non-nullable type String
+w: file:///home/runner/work/synkeybuild/synkeybuild/app/src/main/java/com/synkey/synkey_nevi/LandmarkNavigationWindow.kt:3396:51 Variable 'calibrationDialog' initializer is redundant
 w: file:///home/runner/work/synkeybuild/synkeybuild/app/src/main/java/com/synkey/synkey_nevi/LandmarkOffsetRegistrationDialog.kt:42:17 Variable 'activity' is never used
 w: file:///home/runner/work/synkeybuild/synkeybuild/app/src/main/java/com/synkey/synkey_nevi/LandmarkOffsetRegistrationDialog.kt:69:17 Variable 'classificationRadioGroup' is never used
 w: file:///home/runner/work/synkeybuild/synkeybuild/app/src/main/java/com/synkey/synkey_nevi/LandmarkOffsetRegistrationDialog.kt:126:30 Unnecessary safe call on a non-null receiver of type SensorManager?
@@ -129,5 +128,5 @@ APK copied to: /home/runner/work/synkeybuild/synkeybuild/app-debug.apk
 No write permission to /var/www/html, attempting sudo copy...
 APK copied to /var/www/html using sudo
 
-BUILD SUCCESSFUL in 2m 35s
+BUILD SUCCESSFUL in 3m 13s
 36 actionable tasks: 36 executed
