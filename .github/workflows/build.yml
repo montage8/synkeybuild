@@ -12,6 +12,10 @@
 name: Build synkey_nevi
 
 on:
+  # 에이전트가 요청 파일만 갱신하면 APK 전송 작업이 실행된다.
+  push:
+    branches: [arena/94294d67-synkeybuild]
+    paths: [tools/apk-request.json]
   repository_dispatch:
     types: [build-request]
   workflow_dispatch:
@@ -27,6 +31,8 @@ permissions:
 
 jobs:
   build:
+    # APK 전송용 push에서는 빌드하지 않고, 나머지는 기존대로 동작한다.
+    if: ${{ github.event_name != 'push' }}
     runs-on: ubuntu-latest
     env:
       SRC_BRANCH: ${{ github.event.client_payload.branch || inputs.branch || 'main' }}
@@ -202,3 +208,99 @@ jobs:
           ids=$(printf '%s' "$resp" | jq -r 'if (.artifacts|type)=="array" then (.artifacts | sort_by(.created_at) | reverse | .[3:] | .[] | .id) else empty end')
           [ -z "$ids" ] && echo "삭제할 아티팩트 없음" && exit 0
           for id in $ids; do curl -sS -o /dev/null -w "delete[%{http_code}] id=$id\n" -X DELETE -H "Authorization: Bearer $GT" -H "Accept: application/vnd.github+json" "https://api.github.com/repos/montage8/synkeybuild/actions/artifacts/$id"; done
+
+  export-apk:
+    name: Export encrypted APK for workspace
+    if: ${{ github.event_name == 'push' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: Checkout APK request
+        uses: actions/checkout@v6
+        with:
+          persist-credentials: false
+
+      - name: Export artifact as encrypted temporary chunks
+        shell: bash
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          set -euo pipefail
+          umask 077
+
+          # 요청 파일에는 비밀값이 아닌 공개키와 대상 run ID만 있다.
+          request_file=tools/apk-request.json
+          [[ -f "$request_file" ]] || { echo 'APK 요청 파일이 없습니다.' >&2; exit 1; }
+          run_id=$(jq -er '.run_id | tostring' "$request_file")
+          public_key_b64=$(jq -er '.public_key' "$request_file")
+          request_id=$(jq -er '.request_id' "$request_file")
+          [[ "$run_id" =~ ^[0-9]+$ ]] || { echo 'run ID가 숫자가 아닙니다.' >&2; exit 1; }
+          [[ "$public_key_b64" =~ ^[A-Za-z0-9+/=]+$ ]] || { echo '공개키 형식 오류' >&2; exit 1; }
+          (( ${#public_key_b64} <= 2048 )) || { echo '공개키가 너무 깁니다.' >&2; exit 1; }
+          [[ "$request_id" =~ ^[0-9a-f]{32}$ ]] || { echo '요청 ID 형식 오류' >&2; exit 1; }
+
+          work_dir=$(mktemp -d "${RUNNER_TEMP}/synkey-apk.XXXXXX")
+          trap 'rm -rf -- "$work_dir"' EXIT
+          printf '%s' "$public_key_b64" | base64 -d > "$work_dir/public.der"
+          openssl pkey -pubin -inform DER -in "$work_dir/public.der" -noout > /dev/null
+
+          # 임의의 아티팩트가 아니라 성공한 기존 빌드의 APK인지 확인한다.
+          run_json=$(gh api "repos/${GITHUB_REPOSITORY}/actions/runs/${run_id}")
+          printf '%s' "$run_json" | jq -e \
+            '.status == "completed" and .conclusion == "success" and .path == ".github/workflows/build.yml"' \
+            > /dev/null || { echo '성공한 빌드 run이 아닙니다.' >&2; exit 1; }
+          run_url=$(printf '%s' "$run_json" | jq -er '.html_url')
+          mkdir -p "$work_dir/artifact"
+          gh run download "$run_id" --repo "$GITHUB_REPOSITORY" \
+            --name synkey-nevi-debug-apk --dir "$work_dir/artifact"
+          mapfile -d '' -t apk_files < <(find "$work_dir/artifact" -type f -iname '*.apk' -print0)
+          (( ${#apk_files[@]} == 1 )) || { echo 'APK가 정확히 하나여야 합니다.' >&2; exit 1; }
+          apk=${apk_files[0]}
+          unzip -tq "$apk" > /dev/null
+          unzip -Z -1 "$apk" > "$work_dir/apk-entries.txt"
+          grep -Fx 'AndroidManifest.xml' "$work_dir/apk-entries.txt" > /dev/null
+          apk_sha256=$(sha256sum "$apk" | cut -d ' ' -f1)
+          apk_size=$(stat -c '%s' "$apk")
+
+          # 1회용 대칭키로 암호화하고, 이 키는 요청자의 공개키로만 암호화한다.
+          # 개인키와 원본 APK는 GitHub 저장소에 올리지 않는다.
+          openssl rand -hex 32 > "$work_dir/passphrase"
+          openssl pkeyutl -encrypt -pubin -inkey "$work_dir/public.der" -keyform DER \
+            -in "$work_dir/passphrase" -out "$work_dir/passphrase.enc" \
+            -pkeyopt rsa_padding_mode:oaep -pkeyopt rsa_oaep_md:sha256
+          openssl enc -aes-256-cbc -salt -pbkdf2 -iter 100000 -md sha256 \
+            -pass "file:$work_dir/passphrase" -in "$apk" -out "$work_dir/apk.enc"
+          cipher_sha256=$(sha256sum "$work_dir/apk.enc" | cut -d ' ' -f1)
+          cipher_size=$(stat -c '%s' "$work_dir/apk.enc")
+
+          # GitHub API 요청 크기 제한을 피하도록 암호문을 8 MiB씩 전송한다.
+          # Git에 파일/커밋을 만들지 않는 임시 Git 객체이며, GitHub의 보관 및
+          # 가비지 컬렉션 시점은 보장할 수 없다.
+          split -b 8M -d -a 4 "$work_dir/apk.enc" "$work_dir/part-"
+          : > "$work_dir/chunks.jsonl"
+          for part in "$work_dir"/part-*; do
+            base64 -w 0 "$part" | jq -Rs '{content: ., encoding: "base64"}' > "$work_dir/request.json"
+            blob_sha=$(gh api --method POST "repos/${GITHUB_REPOSITORY}/git/blobs" \
+              --input "$work_dir/request.json" --jq '.sha')
+            [[ "$blob_sha" =~ ^[0-9a-f]{40}$ ]] || { echo 'Git 객체 생성 실패' >&2; exit 1; }
+            part_sha256=$(sha256sum "$part" | cut -d ' ' -f1)
+            part_size=$(stat -c '%s' "$part")
+            jq -nc --arg blob "$blob_sha" --arg sha256 "$part_sha256" --argjson size "$part_size" \
+              '{blob: $blob, sha256: $sha256, size: $size}' >> "$work_dir/chunks.jsonl"
+          done
+
+          # 개인키가 없는 공개 매니페스트다. 에이전트가 Actions 검사 주석에서 읽는다.
+          enc_passphrase=$(base64 -w 0 "$work_dir/passphrase.enc")
+          jq -nc \
+            --argjson version 1 --argjson run_id "$run_id" --arg run_url "$run_url" \
+            --arg request_id "$request_id" --arg request_commit "$GITHUB_SHA" \
+            --arg apk_sha256 "$apk_sha256" --argjson apk_size "$apk_size" \
+            --arg cipher_sha256 "$cipher_sha256" --argjson cipher_size "$cipher_size" \
+            --arg enc_passphrase "$enc_passphrase" --slurpfile chunks "$work_dir/chunks.jsonl" \
+            '{version: $version, run_id: $run_id, run_url: $run_url,
+              request_id: $request_id, request_commit: $request_commit,
+              apk_sha256: $apk_sha256, apk_size: $apk_size,
+              cipher_sha256: $cipher_sha256, cipher_size: $cipher_size,
+              enc_passphrase: $enc_passphrase, chunks: $chunks}' > "$work_dir/manifest.json"
+          printf '::notice title=SYNKEY_APK_MANIFEST::%s\n' "$(base64 -w 0 "$work_dir/manifest.json")"
+          echo "암호화된 APK 전송 준비 완료: run $run_id"
