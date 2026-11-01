@@ -37,20 +37,20 @@ Installing Android SDK Build-Tools 33.0.1 in /usr/local/lib/android/sdk/build-to
 > Task :app:mergeDebugAssets
 > Task :app:compressDebugAssets
 > Task :app:desugarDebugFileDependencies
-> Task :app:processDebugManifestForPackage
-> Task :app:checkDebugDuplicateClasses
-> Task :app:processDebugResources
-> Task :app:mergeExtDexDebug
 > Task :app:mergeDebugJniLibFolders
+> Task :app:checkDebugDuplicateClasses
+> Task :app:mergeDebugNativeLibs
+> Task :app:processDebugManifestForPackage
+> Task :app:mergeExtDexDebug
 > Task :app:mergeLibDexDebug
 > Task :app:validateSigningDebug
 > Task :app:writeDebugAppMetadata
 > Task :app:writeDebugSigningConfigVersions
-> Task :app:mergeDebugNativeLibs
 
 > Task :app:stripDebugDebugSymbols
 Unable to strip the following libraries, packaging them as they are: libimage_processing_util_jni.so, libmediapipe_tasks_jni.so, libmlkit_google_ocr_pipeline.so, librealm-jni.so.
 
+> Task :app:processDebugResources
 > Task :app:compileDebugKotlin
 w: file:///home/runner/work/synkeybuild/synkeybuild/app/src/main/java/com/synkey/synkey_nevi/AdvancedGuidanceHelper.kt:188:33 'requestSingleUpdate(String, LocationListener, Looper?): Unit' is deprecated. Deprecated in Java
 w: file:///home/runner/work/synkeybuild/synkeybuild/app/src/main/java/com/synkey/synkey_nevi/AdvancedGuidanceHelper.kt:190:33 'requestSingleUpdate(String, LocationListener, Looper?): Unit' is deprecated. Deprecated in Java
@@ -105,9 +105,11 @@ w: file:///home/runner/work/synkeybuild/synkeybuild/app/src/main/java/com/synkey
 w: file:///home/runner/work/synkeybuild/synkeybuild/app/src/main/java/com/synkey/synkey_nevi/UsbGpsManager.kt:488:19 Unnecessary safe call on a non-null receiver of type Context
 w: file:///home/runner/work/synkeybuild/synkeybuild/app/src/main/java/com/synkey/synkey_nevi/UsbGpsManager.kt:494:19 Unnecessary safe call on a non-null receiver of type Context
 w: file:///home/runner/work/synkeybuild/synkeybuild/app/src/main/java/com/synkey/synkey_nevi/UsbGpsManager.kt:499:19 Unnecessary safe call on a non-null receiver of type Context
-w: file:///home/runner/work/synkeybuild/synkeybuild/app/src/main/java/com/synkey/synkey_nevi/VisualAssistanceSession.kt:192:70 'getter for defaultDisplay: Display!' is deprecated. Deprecated in Java
-w: file:///home/runner/work/synkeybuild/synkeybuild/app/src/main/java/com/synkey/synkey_nevi/VisualAssistanceSession.kt:197:26 'setTargetAspectRatio(Int): Preview.Builder' is deprecated. Deprecated in Java
-w: file:///home/runner/work/synkeybuild/synkeybuild/app/src/main/java/com/synkey/synkey_nevi/VisualAssistanceSession.kt:204:22 'setTargetResolution(Size): ImageAnalysis.Builder' is deprecated. Deprecated in Java
+w: file:///home/runner/work/synkeybuild/synkeybuild/app/src/main/java/com/synkey/synkey_nevi/VisualAssistanceSession.kt:202:70 'getter for defaultDisplay: Display!' is deprecated. Deprecated in Java
+w: file:///home/runner/work/synkeybuild/synkeybuild/app/src/main/java/com/synkey/synkey_nevi/VisualAssistanceSession.kt:207:26 'setTargetAspectRatio(Int): Preview.Builder' is deprecated. Deprecated in Java
+w: file:///home/runner/work/synkeybuild/synkeybuild/app/src/main/java/com/synkey/synkey_nevi/VisualAssistanceSession.kt:214:22 'setTargetResolution(Size): ImageAnalysis.Builder' is deprecated. Deprecated in Java
+w: file:///home/runner/work/synkeybuild/synkeybuild/app/src/main/java/com/synkey/synkey_nevi/VisualAssistanceSession.kt:226:22 'setTargetResolution(Size): ImageCapture.Builder' is deprecated. Deprecated in Java
+w: file:///home/runner/work/synkeybuild/synkeybuild/app/src/main/java/com/synkey/synkey_nevi/VisualAssistanceSession.kt:527:56 Unnecessary non-null assertion (!!) on a non-null receiver of type Bitmap
 w: file:///home/runner/work/synkeybuild/synkeybuild/app/src/main/java/com/synkey/synkey_nevi/VworldService.kt:105:52 Unnecessary safe call on a non-null receiver of type VworldSearchResult?
 w: file:///home/runner/work/synkeybuild/synkeybuild/app/src/main/java/com/synkey/synkey_nevi/VworldService.kt:189:52 Unnecessary safe call on a non-null receiver of type VworldSearchResult?
 w: file:///home/runner/work/synkeybuild/synkeybuild/app/src/main/java/com/synkey/synkey_nevi/VworldService.kt:302:41 Unnecessary safe call on a non-null receiver of type VworldGeocodeResult?
@@ -132,5 +134,5 @@ APK copied to: /home/runner/work/synkeybuild/synkeybuild/app-debug.apk
 No write permission to /var/www/html, attempting sudo copy...
 APK copied to /var/www/html using sudo
 
-BUILD SUCCESSFUL in 3m 19s
+BUILD SUCCESSFUL in 3m 29s
 36 actionable tasks: 36 executed
