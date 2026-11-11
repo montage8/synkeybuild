@@ -1,9 +1,9 @@
 {
   "source_branch": "feature/senior-map-ui",
-  "source_sha": "a7fccae62a05ea8e9b124edb3f830694566598af",
+  "source_sha": "f4c09e6c8bda0946634a8062532cec69e908792d",
   "build_outcome": "success",
-  "run_id": 42985028251,
+  "run_id": 42986762560,
   "run_attempt": 1,
-  "run_url": "https://github.com/montage8/synkeybuild/actions/runs/42985028251",
-  "generated_at": "2026-11-11T08:14:35Z"
+  "run_url": "https://github.com/montage8/synkeybuild/actions/runs/42986762560",
+  "generated_at": "2026-11-11T08:27:50Z"
 }
