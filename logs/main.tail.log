@@ -35,23 +35,22 @@ Installing Android SDK Build-Tools 33.0.1 in /usr/local/lib/android/sdk/build-to
 > Task :app:compileDebugShaders NO-SOURCE
 > Task :app:generateDebugAssets UP-TO-DATE
 > Task :app:mergeDebugAssets
-> Task :app:processDebugManifestForPackage
-> Task :app:processDebugResources
 > Task :app:compressDebugAssets
-> Task :app:checkDebugDuplicateClasses
 > Task :app:desugarDebugFileDependencies
-> Task :app:compileDebugKotlin
-> Task :app:mergeExtDexDebug
 > Task :app:mergeDebugJniLibFolders
+> Task :app:checkDebugDuplicateClasses
+> Task :app:mergeDebugNativeLibs
+> Task :app:processDebugManifestForPackage
+> Task :app:mergeExtDexDebug
 > Task :app:mergeLibDexDebug
 > Task :app:validateSigningDebug
 > Task :app:writeDebugAppMetadata
 > Task :app:writeDebugSigningConfigVersions
-> Task :app:mergeDebugNativeLibs
 
 > Task :app:stripDebugDebugSymbols
 Unable to strip the following libraries, packaging them as they are: libimage_processing_util_jni.so, libmediapipe_tasks_jni.so, libmlkit_google_ocr_pipeline.so, librealm-jni.so.
 
+> Task :app:processDebugResources
 > Task :app:compileDebugKotlin
 w: file:///home/runner/work/synkeybuild/synkeybuild/app/src/main/java/com/synkey/synkey_nevi/AdvancedGuidanceHelper.kt:188:33 'requestSingleUpdate(String, LocationListener, Looper?): Unit' is deprecated. Deprecated in Java
 w: file:///home/runner/work/synkeybuild/synkeybuild/app/src/main/java/com/synkey/synkey_nevi/AdvancedGuidanceHelper.kt:190:33 'requestSingleUpdate(String, LocationListener, Looper?): Unit' is deprecated. Deprecated in Java
@@ -135,5 +134,5 @@ APK copied to: /home/runner/work/synkeybuild/synkeybuild/app-debug.apk
 No write permission to /var/www/html, attempting sudo copy...
 APK copied to /var/www/html using sudo
 
-BUILD SUCCESSFUL in 3m 29s
+BUILD SUCCESSFUL in 2m 53s
 36 actionable tasks: 36 executed
