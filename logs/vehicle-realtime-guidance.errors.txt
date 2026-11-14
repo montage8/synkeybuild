@@ -1,7 +1,7 @@
 ----- What went wrong 본문 -----
-w: file:///home/runner/work/synkeybuild/synkeybuild/app/src/main/java/com/synkey/synkey_nevi/LandmarkNavigationWindow.kt:1927:53 Parameter 'currentLoc' is never used
-w: file:///home/runner/work/synkeybuild/synkeybuild/app/src/main/java/com/synkey/synkey_nevi/LandmarkNavigationWindow.kt:3168:74 Elvis operator (?:) always returns the left operand of non-nullable type String
-w: file:///home/runner/work/synkeybuild/synkeybuild/app/src/main/java/com/synkey/synkey_nevi/LandmarkNavigationWindow.kt:3193:74 Elvis operator (?:) always returns the left operand of non-nullable type String
+w: file:///home/runner/work/synkeybuild/synkeybuild/app/src/main/java/com/synkey/synkey_nevi/LandmarkNavigationWindow.kt:1935:53 Parameter 'currentLoc' is never used
+w: file:///home/runner/work/synkeybuild/synkeybuild/app/src/main/java/com/synkey/synkey_nevi/LandmarkNavigationWindow.kt:3180:74 Elvis operator (?:) always returns the left operand of non-nullable type String
+w: file:///home/runner/work/synkeybuild/synkeybuild/app/src/main/java/com/synkey/synkey_nevi/LandmarkNavigationWindow.kt:3205:74 Elvis operator (?:) always returns the left operand of non-nullable type String
 w: file:///home/runner/work/synkeybuild/synkeybuild/app/src/main/java/com/synkey/synkey_nevi/LandmarkOffsetRegistrationDialog.kt:42:17 Variable 'activity' is never used
 w: file:///home/runner/work/synkeybuild/synkeybuild/app/src/main/java/com/synkey/synkey_nevi/LandmarkOffsetRegistrationDialog.kt:69:17 Variable 'classificationRadioGroup' is never used
 w: file:///home/runner/work/synkeybuild/synkeybuild/app/src/main/java/com/synkey/synkey_nevi/LandmarkOffsetRegistrationDialog.kt:126:30 Unnecessary safe call on a non-null receiver of type SensorManager?
@@ -22,12 +22,12 @@ w: file:///home/runner/work/synkeybuild/synkeybuild/app/src/main/java/com/synkey
 w: file:///home/runner/work/synkeybuild/synkeybuild/app/src/main/java/com/synkey/synkey_nevi/RtkStatusAnnouncer.kt:77:13 Variable 'ctx' is never used
 w: file:///home/runner/work/synkeybuild/synkeybuild/app/src/main/java/com/synkey/synkey_nevi/TextToSpeechHelper.kt:79:22 This declaration overrides deprecated member but not marked as deprecated itself. Please add @Deprecated annotation or suppress. See https://youtrack.jetbrains.com/issue/KT-47902 for details
 w: file:///home/runner/work/synkeybuild/synkeybuild/app/src/main/java/com/synkey/synkey_nevi/TextToSpeechHelper.kt:182:28 'getter for language: Locale!' is deprecated. Deprecated in Java
-w: file:///home/runner/work/synkeybuild/synkeybuild/app/src/main/java/com/synkey/synkey_nevi/UsbGpsManager.kt:474:19 Unnecessary safe call on a non-null receiver of type Context
-w: file:///home/runner/work/synkeybuild/synkeybuild/app/src/main/java/com/synkey/synkey_nevi/UsbGpsManager.kt:479:19 Unnecessary safe call on a non-null receiver of type Context
-w: file:///home/runner/work/synkeybuild/synkeybuild/app/src/main/java/com/synkey/synkey_nevi/UsbGpsManager.kt:485:19 Unnecessary safe call on a non-null receiver of type Context
-w: file:///home/runner/work/synkeybuild/synkeybuild/app/src/main/java/com/synkey/synkey_nevi/UsbGpsManager.kt:490:19 Unnecessary safe call on a non-null receiver of type Context
-w: file:///home/runner/work/synkeybuild/synkeybuild/app/src/main/java/com/synkey/synkey_nevi/UsbGpsManager.kt:496:19 Unnecessary safe call on a non-null receiver of type Context
-w: file:///home/runner/work/synkeybuild/synkeybuild/app/src/main/java/com/synkey/synkey_nevi/UsbGpsManager.kt:501:19 Unnecessary safe call on a non-null receiver of type Context
+w: file:///home/runner/work/synkeybuild/synkeybuild/app/src/main/java/com/synkey/synkey_nevi/UsbGpsManager.kt:475:19 Unnecessary safe call on a non-null receiver of type Context
+w: file:///home/runner/work/synkeybuild/synkeybuild/app/src/main/java/com/synkey/synkey_nevi/UsbGpsManager.kt:480:19 Unnecessary safe call on a non-null receiver of type Context
+w: file:///home/runner/work/synkeybuild/synkeybuild/app/src/main/java/com/synkey/synkey_nevi/UsbGpsManager.kt:486:19 Unnecessary safe call on a non-null receiver of type Context
+w: file:///home/runner/work/synkeybuild/synkeybuild/app/src/main/java/com/synkey/synkey_nevi/UsbGpsManager.kt:491:19 Unnecessary safe call on a non-null receiver of type Context
+w: file:///home/runner/work/synkeybuild/synkeybuild/app/src/main/java/com/synkey/synkey_nevi/UsbGpsManager.kt:497:19 Unnecessary safe call on a non-null receiver of type Context
+w: file:///home/runner/work/synkeybuild/synkeybuild/app/src/main/java/com/synkey/synkey_nevi/UsbGpsManager.kt:502:19 Unnecessary safe call on a non-null receiver of type Context
 w: file:///home/runner/work/synkeybuild/synkeybuild/app/src/main/java/com/synkey/synkey_nevi/VisualAssistanceSession.kt:202:70 'getter for defaultDisplay: Display!' is deprecated. Deprecated in Java
 w: file:///home/runner/work/synkeybuild/synkeybuild/app/src/main/java/com/synkey/synkey_nevi/VisualAssistanceSession.kt:207:26 'setTargetAspectRatio(Int): Preview.Builder' is deprecated. Deprecated in Java
 w: file:///home/runner/work/synkeybuild/synkeybuild/app/src/main/java/com/synkey/synkey_nevi/VisualAssistanceSession.kt:214:22 'setTargetResolution(Size): ImageAnalysis.Builder' is deprecated. Deprecated in Java
@@ -57,5 +57,5 @@ APK copied to: /home/runner/work/synkeybuild/synkeybuild/app-debug.apk
 No write permission to /var/www/html, attempting sudo copy...
 APK copied to /var/www/html using sudo
 
-BUILD SUCCESSFUL in 2m 24s
+BUILD SUCCESSFUL in 3m 32s
 36 actionable tasks: 36 executed
