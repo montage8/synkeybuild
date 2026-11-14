@@ -1,0 +1,9 @@
+{
+  "source_branch": "vehicle-realtime-guidance",
+  "source_sha": "d275fe9f873f41467d511eeb20e00b4513da5de1",
+  "build_outcome": "success",
+  "run_id": 43583093755,
+  "run_attempt": 1,
+  "run_url": "https://github.com/montage8/synkeybuild/actions/runs/43583093755",
+  "generated_at": "2026-11-14T10:01:56Z"
+}
