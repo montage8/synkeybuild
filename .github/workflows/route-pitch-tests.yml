@@ -1,0 +1,29 @@
+name: Route pitch unit tests
+on:
+  workflow_dispatch:
+    inputs:
+      branch:
+        description: Private source branch
+        required: true
+permissions:
+  contents: read
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          repository: montage8/synkey_nevi
+          ref: ${{ inputs.branch }}
+          token: ${{ secrets.SOURCE_TOKEN }}
+          persist-credentials: false
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+      - name: Run route pitch tests
+        env:
+          VWORLD_API_KEY: ${{ secrets.VWORLD_API_KEY }}
+        run: |
+          chmod +x gradlew
+          ./gradlew testDebugUnitTest --tests com.synkey.synkey_nevi.RoutePitchMathTest --no-daemon --stacktrace
