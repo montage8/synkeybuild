@@ -34,17 +34,17 @@ w: file:///home/runner/work/synkeybuild/synkeybuild/app/build.gradle.kts:163:59:
 > Task :app:processDebugManifest
 > Task :app:javaPreCompileDebug
 > Task :app:mergeDebugShaders
+> Task :app:processDebugManifestForPackage
 > Task :app:compileDebugShaders NO-SOURCE
 > Task :app:generateDebugAssets UP-TO-DATE
 > Task :app:mergeDebugAssets
-> Task :app:processDebugManifestForPackage
 > Task :app:compressDebugAssets
-> Task :app:processDebugResources
-> Task :app:checkDebugDuplicateClasses
 > Task :app:desugarDebugFileDependencies
+> Task :app:processDebugResources
+> Task :app:mergeDebugJniLibFolders
+> Task :app:checkDebugDuplicateClasses
 > Task :app:compileDebugKotlin
 > Task :app:mergeExtDexDebug
-> Task :app:mergeDebugJniLibFolders
 > Task :app:mergeLibDexDebug
 > Task :app:validateSigningDebug
 > Task :app:writeDebugAppMetadata
@@ -58,7 +58,6 @@ Unable to strip the following libraries, packaging them as they are: libK3fAndro
 w: file:///home/runner/work/synkeybuild/synkeybuild/app/src/main/java/com/synkey/synkey_nevi/AdvancedGuidanceHelper.kt:188:33 'requestSingleUpdate(String, LocationListener, Looper?): Unit' is deprecated. Deprecated in Java
 w: file:///home/runner/work/synkeybuild/synkeybuild/app/src/main/java/com/synkey/synkey_nevi/AdvancedGuidanceHelper.kt:190:33 'requestSingleUpdate(String, LocationListener, Looper?): Unit' is deprecated. Deprecated in Java
 w: file:///home/runner/work/synkeybuild/synkeybuild/app/src/main/java/com/synkey/synkey_nevi/BeaconAudioFeedback.kt:202:26 'constructor AudioTrack(Int, Int, Int, Int, Int, Int)' is deprecated. Deprecated in Java
-w: file:///home/runner/work/synkeybuild/synkeybuild/app/src/main/java/com/synkey/synkey_nevi/ClockDirectionAudioFeedback.kt:44:28 'constructor AudioTrack(Int, Int, Int, Int, Int, Int)' is deprecated. Deprecated in Java
 w: file:///home/runner/work/synkeybuild/synkeybuild/app/src/main/java/com/synkey/synkey_nevi/CommunicationSettingsDialog.kt:53:28 'announceForAccessibility(CharSequence!): Unit' is deprecated. Deprecated in Java
 w: file:///home/runner/work/synkeybuild/synkeybuild/app/src/main/java/com/synkey/synkey_nevi/CommunicationSettingsDialog.kt:73:27 'announceForAccessibility(CharSequence!): Unit' is deprecated. Deprecated in Java
 w: file:///home/runner/work/synkeybuild/synkeybuild/app/src/main/java/com/synkey/synkey_nevi/CommunicationSettingsDialog.kt:216:35 'announceForAccessibility(CharSequence!): Unit' is deprecated. Deprecated in Java
@@ -84,9 +83,9 @@ w: file:///home/runner/work/synkeybuild/synkeybuild/app/src/main/java/com/synkey
 w: file:///home/runner/work/synkeybuild/synkeybuild/app/src/main/java/com/synkey/synkey_nevi/KnsdkSafetyManager.kt:546:46 The corresponding parameter in the supertype 'KNGuidance_VoiceGuideDelegate' is named 'aGuidance'. This may cause problems when calling this function with named arguments.
 w: file:///home/runner/work/synkeybuild/synkeybuild/app/src/main/java/com/synkey/synkey_nevi/KnsdkSafetyManager.kt:546:68 The corresponding parameter in the supertype 'KNGuidance_VoiceGuideDelegate' is named 'aVoiceGuide'. This may cause problems when calling this function with named arguments.
 w: file:///home/runner/work/synkeybuild/synkeybuild/app/src/main/java/com/synkey/synkey_nevi/KnsdkSafetyManager.kt:555:26 Parameter 'location' is never used
-w: file:///home/runner/work/synkeybuild/synkeybuild/app/src/main/java/com/synkey/synkey_nevi/LandmarkNavigationWindow.kt:1963:53 Parameter 'currentLoc' is never used
-w: file:///home/runner/work/synkeybuild/synkeybuild/app/src/main/java/com/synkey/synkey_nevi/LandmarkNavigationWindow.kt:3208:74 Elvis operator (?:) always returns the left operand of non-nullable type String
-w: file:///home/runner/work/synkeybuild/synkeybuild/app/src/main/java/com/synkey/synkey_nevi/LandmarkNavigationWindow.kt:3233:74 Elvis operator (?:) always returns the left operand of non-nullable type String
+w: file:///home/runner/work/synkeybuild/synkeybuild/app/src/main/java/com/synkey/synkey_nevi/LandmarkNavigationWindow.kt:1965:53 Parameter 'currentLoc' is never used
+w: file:///home/runner/work/synkeybuild/synkeybuild/app/src/main/java/com/synkey/synkey_nevi/LandmarkNavigationWindow.kt:3210:74 Elvis operator (?:) always returns the left operand of non-nullable type String
+w: file:///home/runner/work/synkeybuild/synkeybuild/app/src/main/java/com/synkey/synkey_nevi/LandmarkNavigationWindow.kt:3235:74 Elvis operator (?:) always returns the left operand of non-nullable type String
 w: file:///home/runner/work/synkeybuild/synkeybuild/app/src/main/java/com/synkey/synkey_nevi/LandmarkOffsetRegistrationDialog.kt:42:17 Variable 'activity' is never used
 w: file:///home/runner/work/synkeybuild/synkeybuild/app/src/main/java/com/synkey/synkey_nevi/LandmarkOffsetRegistrationDialog.kt:69:17 Variable 'classificationRadioGroup' is never used
 w: file:///home/runner/work/synkeybuild/synkeybuild/app/src/main/java/com/synkey/synkey_nevi/LandmarkOffsetRegistrationDialog.kt:126:30 Unnecessary safe call on a non-null receiver of type SensorManager?
@@ -149,5 +148,5 @@ You can use '--warning-mode all' to show the individual deprecation warnings and
 
 For more on this, please refer to https://docs.gradle.org/8.11.1/userguide/command_line_interface.html#sec:command_line_warnings in the Gradle documentation.
 
-BUILD SUCCESSFUL in 3m 49s
+BUILD SUCCESSFUL in 3m 42s
 37 actionable tasks: 37 executed
