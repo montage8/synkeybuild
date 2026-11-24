@@ -1,9 +1,9 @@
 {
   "source_branch": "pedestrian-route-pitch",
-  "source_sha": "74dd32662f147727ee3981779eaa2f4dab729c5f",
-  "build_outcome": "success",
-  "run_id": 45288330294,
+  "source_sha": "442c2e6307142b5d223a416eecfd5d038c3c6c78",
+  "build_outcome": "failure",
+  "run_id": 45312244457,
   "run_attempt": 1,
-  "run_url": "https://github.com/montage8/synkeybuild/actions/runs/45288330294",
-  "generated_at": "2026-11-23T23:26:08Z"
+  "run_url": "https://github.com/montage8/synkeybuild/actions/runs/45312244457",
+  "generated_at": "2026-11-24T02:33:26Z"
 }
